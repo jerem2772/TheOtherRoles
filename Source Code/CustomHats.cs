@@ -337,7 +337,8 @@ namespace TheOtherRoles {
 
     public class CustomHatLoader {
         public static bool running = false;
-        private const string REPO = "https://raw.githubusercontent.com/Eisbison/TheOtherHats/master";
+        //private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/Master-LeCrew";  //Branch Master
+        private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/DEV-LeCrew";   //Branch DEV
 
         public static List<CustomHatOnline> hatdetails = new List<CustomHatOnline>();
         private static Task hatFetchTask = null;
