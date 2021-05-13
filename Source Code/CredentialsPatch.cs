@@ -46,11 +46,11 @@ $@"Modded by <color=#FCCE03FF>Eisbison</color>
         {
             static void Postfix(PingTracker __instance){
 
-                    var lcObject = new GameObject("LeCrew");
-                    lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
-                    lcObject.transform.parent = __instance.transform;
-                    lcObject.transform.localPosition = new Vector3(1f, -0.1f, __instance.transform.localPosition.z);
-                    lcObject.transform.localScale *= 0.55f;
+                    //var lcObject = new GameObject("LeCrew");
+                    //lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
+                    //lcObject.transform.parent = __instance.transform;
+                    //lcObject.transform.localPosition = new Vector3(1f, -0.1f, __instance.transform.localPosition.z);
+                    //lcObject.transform.localScale *= 0.55f;
 
                 __instance.text.alignment = TMPro.TextAlignmentOptions.TopRight;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
