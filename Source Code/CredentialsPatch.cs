@@ -11,15 +11,13 @@ namespace TheOtherRoles
     [HarmonyPatch]
     public static class CredentialsPatch {
         public static string fullCredentials = 
-$@"<size=130%><color=#ff351f>TheOtherRoles</color></size> v{TheOtherRolesPlugin.Version.ToString()}
-<size=80%>Modded by <color=#FCCE03FF>Eisbison</color>,
-<color=#FCCE03FF>Thunderstorm584</color> & <color=#FCCE03FF>EndOfFile</color>
-Balanced with <color=#FCCE03FF>Dhalucard</color>
-Button design by <color=#FCCE03FF>Bavari</color></size>";
+$@"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}
+<size=80%>Modded by <color=#FCCE03FF>Eisbison</color>
+<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>";
 
     public static string mainMenuCredentials = 
-$@"Modded by <color=#FCCE03FF>Eisbison</color>, <color=#FCCE03FF>Thunderstorm584</color> & <color=#FCCE03FF>EndOfFile</color>
-Balanced with <color=#FCCE03FF>Dhalucard</color>      Design by <color=#FCCE03FF>Bavari</color>";
+$@"Modded by <color=#FCCE03FF>Eisbison</color>
+<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>";
 
         [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
         private static class VersionShowerPatch
@@ -47,17 +45,24 @@ Balanced with <color=#FCCE03FF>Dhalucard</color>      Design by <color=#FCCE03FF
         private static class PingTrackerPatch
         {
             static void Postfix(PingTracker __instance){
+
+                    var lcObject = new GameObject("LeCrew");
+                    lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
+                    lcObject.transform.parent = __instance.transform;
+                    lcObject.transform.localPosition = new Vector3(1f, -0.1f, __instance.transform.localPosition.z);
+                    lcObject.transform.localScale *= 0.55f;
+
                 __instance.text.alignment = TMPro.TextAlignmentOptions.TopRight;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
-                    __instance.text.text = $"<size=130%><color=#ff351f>TheOtherRoles</color></size> v{TheOtherRolesPlugin.Version.ToString()}\n" + __instance.text.text;
+                    __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\n<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>\n" + __instance.text.text;
                     if (PlayerControl.LocalPlayer.Data.IsDead) {
-                        __instance.transform.localPosition = new Vector3(3.45f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(2.95f, 2.675f, __instance.transform.localPosition.z);
                     } else {
-                        __instance.transform.localPosition = new Vector3(4.2f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(3.7f, 2.675f, __instance.transform.localPosition.z);
                     }
                 } else {
                     __instance.text.text = $"{fullCredentials}\n{__instance.text.text}";
-                    __instance.transform.localPosition = new Vector3(3.5f, 2.675f, __instance.transform.localPosition.z);
+                    __instance.transform.localPosition = new Vector3(3f, 2.675f, __instance.transform.localPosition.z);
                 }
             }
         }
@@ -71,6 +76,14 @@ Balanced with <color=#FCCE03FF>Dhalucard</color>      Design by <color=#FCCE03FF
                     amongUsLogo.transform.localScale *= 0.6f;
                     amongUsLogo.transform.position += Vector3.up * 0.25f;
                 }
+
+                var lcObject = new GameObject("LeCrew");
+                lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
+                lcObject.transform.parent = __instance.transform;
+                lcObject.transform.localPosition = new Vector3(3.8f, -1.2f, __instance.transform.localPosition.z);
+                lcObject.transform.localScale *= 2.5f;
+
+
 
                 var torLogo = new GameObject("bannerLogo_TOR");
                 torLogo.transform.position = Vector3.up;
