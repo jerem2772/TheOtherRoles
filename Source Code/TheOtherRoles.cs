@@ -52,6 +52,15 @@ namespace TheOtherRoles
             Arsonist.clearAndReload();
         }
 
+
+        
+        private static Sprite LogoSprite;
+        public static Sprite getLogo(string source, float pixelsPerUnit) {
+            if (LogoSprite) return LogoSprite;
+            LogoSprite = Helpers.loadSpriteFromResources(source, pixelsPerUnit);
+            return LogoSprite;
+        }
+        
         public static class Jester {
             public static PlayerControl jester;
             public static Color color = new Color(255f / 255f, 84f / 255f, 167f / 255f, 1);

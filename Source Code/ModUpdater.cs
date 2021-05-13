@@ -45,7 +45,7 @@ namespace TheOtherRoles {
             
             var text = button.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
             __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => {
-                text.SetText("Update\nThe Other Roles");
+                text.SetText("Update\nThe Others Role\nLe Crew");
             })));
 
             TwitchManager man = DestroyableSingleton<TwitchManager>.Instance;
@@ -56,8 +56,8 @@ namespace TheOtherRoles {
                 button.SetActive(false);
                 ModUpdater.InfoPopup.TextAreaTMP.fontSize *= 0.7f;
                 ModUpdater.InfoPopup.TextAreaTMP.enableAutoSizing = false;
-                ModUpdater.InfoPopup.Show("Updating The Other Roles\nPlease wait...");
-                __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Updating The Other Roles\nPlease wait..."); })));
+                ModUpdater.InfoPopup.Show("Mise à jour en cours\nVeuillez patienter...");
+                __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Mis à jour en cours\nVeuillez patienter..."); })));
             }
         }
     }
@@ -81,7 +81,7 @@ namespace TheOtherRoles {
                 if (updateurl != null) {
                     updateTask = downloadUpdate();
                 } else {
-                    showPopup("This update has to be done manually");
+                    showPopup("Cette mise à jour doit\nêtre effectuée manuellement ");
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace TheOtherRoles {
             try {
                 HttpClient http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "TheOtherRoles Updater");
-                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/Eisbison/TheOtherRoles/releases/latest"), HttpCompletionOption.ResponseContentRead);
+                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/Jerem2772/TheOtherRoles-LeCrew/releases/latest"), HttpCompletionOption.ResponseContentRead);
                 // var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/EoF-1141/TheOtherRoles/releases/latest"), HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null) {
                     System.Console.WriteLine("Server returned no data: " + response.StatusCode.ToString());
@@ -163,13 +163,13 @@ namespace TheOtherRoles {
                         responseStream.CopyTo(fileStream); 
                     }
                 }
-                showPopup("The Other Roles\nupdated successfully\nPlease restart the game.");
+                showPopup("The Other Roles - Le Crew\na été mis à jour avec succès\nRedemarrer le jeu.");
                 return true;
             } catch (System.Exception ex) {
                 TheOtherRolesPlugin.Instance.Log.LogError(ex.ToString());
                 System.Console.WriteLine(ex);
             }
-            showPopup("Update wasn't successful\nTry again later,\nor update manually.");
+            showPopup("Echec de la mise à jour\nRéessayer plus tard,\nou faite la MAJ manuellement.");
             return false;
         }
         private static void showPopup(string message) {

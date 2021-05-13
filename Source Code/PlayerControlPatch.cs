@@ -535,15 +535,15 @@ namespace TheOtherRoles {
                     string msg = "";
 
                     if (isMedicReport) {
-                        msg = $"Body Report: Killed {Math.Round(timeSinceDeath / 1000)}s ago!";
+                        msg = $"Body Report: Le cadavre a {Math.Round(timeSinceDeath / 1000)}s !";
                     } else if (isDetectiveReport) {
                         if (timeSinceDeath < Detective.reportNameDuration * 1000) {
-                            msg =  $"Body Report: The killer appears to be {deadPlayer.killerIfExisting.name}!";
+                            msg =  $"Body Report: Le tueur semble être {deadPlayer.killerIfExisting.name}!";
                         } else if (timeSinceDeath < Detective.reportColorDuration * 1000) {
-                            var typeOfColor = Helpers.isLighterColor(deadPlayer.killerIfExisting.Data.ColorId) ? "lighter" : "darker";
-                            msg =  $"Body Report: The killer appears to be a {typeOfColor} color!";
+                            var typeOfColor = Helpers.isLighterColor(deadPlayer.killerIfExisting.Data.ColorId) ? "clair" : "sombre";
+                            msg =  $"Body Report: Le tueur semble être de couleur {typeOfColor} !";
                         } else {
-                            msg = $"Body Report: The corpse is too old to gain information from!";
+                            msg = $"Body Report: Le cadavre est trop vieux pour obtenir des informations !";
                         }
                     }
 

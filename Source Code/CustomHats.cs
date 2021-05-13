@@ -308,7 +308,8 @@ namespace TheOtherRoles {
 
                 var orderedKeys = packages.Keys.OrderBy((string x) => {
                     if (x == innerslothPackageName) return 1000;
-                    if (x == "Developer Hats") return 0;
+                    if (x == "Le Crew") return 0;
+                    if (x == "Developer Hats") return 1;
                     return 500;
                 });
                 foreach (string key in orderedKeys) {
@@ -337,8 +338,8 @@ namespace TheOtherRoles {
 
     public class CustomHatLoader {
         public static bool running = false;
-        //private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/Master-LeCrew";  //Branch Master
-        private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/DEV-LeCrew";   //Branch DEV
+        private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/Master-LeCrew";  //Branch Master
+        //private const string REPO = "https://raw.githubusercontent.com/Jerem2772/TheOtherHats-LeCrew/LeCrew-DEV";   //Branch DEV
 
         public static List<CustomHatOnline> hatdetails = new List<CustomHatOnline>();
         private static Task hatFetchTask = null;

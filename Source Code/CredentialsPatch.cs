@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using TheOtherRoles;
 
 namespace TheOtherRoles
 {
     [HarmonyPatch]
     public static class CredentialsPatch {
         public static string fullCredentials = 
-$@"<color=#FCCE03FF>TheOtherRoles</color> v{TheOtherRolesPlugin.Version.ToString()}:
-- Modded by <color=#FCCE03FF>Eisbison</color>,
-  <color=#FFEB91FF>Thunderstorm584</color> and <color=#FFEB91FF>EndOfFile</color>
-- Balanced with <color=#FFEB91FF>Dhalucard</color>
-- Button design by <color=#FFEB91FF>Bavari</color>";
+$@"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}:
+Modded by <color=#FCCE03FF>Eisbison</color>
+<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>";
+
 
         [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
         private static class VersionShowerPatch
@@ -34,14 +34,31 @@ $@"<color=#FCCE03FF>TheOtherRoles</color> v{TheOtherRolesPlugin.Version.ToString
         [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
         private static class PingTrackerPatch
         {
-            static void Postfix(PingTracker __instance)
+           
+
+        static void Postfix(PingTracker __instance)
+        { 
+            if (!__instance.GetComponentInChildren<SpriteRenderer>())
             {
-                if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
-                    __instance.text.text = "<color=#FCCE03FF>TheOtherRoles</color>\nModded by <color=#FCCE03FF>Eisbison</color>\n" + __instance.text.text;
-                    __instance.transform.localPosition = new Vector3(2.583f, 2.675f, __instance.transform.localPosition.z);
-                } else {
-                    __instance.text.text = $"{fullCredentials}\n{__instance.text.text}";
-                    __instance.transform.localPosition = new Vector3(1.25f, 2.675f, __instance.transform.localPosition.z);
+                    var lcObject = new GameObject("LeCrew");
+
+                    lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 100f);
+
+                    lcObject.transform.parent = __instance.transform;
+                    lcObject.transform.localPosition = new Vector3(-0.8f, 0f, -1);
+                    lcObject.transform.localScale *= 0.72f;
+
+                    if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) 
+                    {
+                        __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> by <color=#FCCE03FF>Eisbison</color>\n<color=#6F6195FF>Le Crew : </color> by <color=#18A5FFFF>Jerem2772</color>\n" + __instance.text.text;
+                        __instance.transform.localPosition = new Vector3(2f, 2.675f, __instance.transform.localPosition.z);
+                    } 
+                    else 
+                    {
+
+                        __instance.text.text = $"{fullCredentials}\n{__instance.text.text}"; 
+                        __instance.transform.localPosition = new Vector3(1.25f, 2.675f, __instance.transform.localPosition.z);
+                    }
                 }
             }
         }

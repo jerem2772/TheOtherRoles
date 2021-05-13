@@ -14,12 +14,12 @@ using UnityEngine;
 
 namespace TheOtherRoles
 {
-    [BepInPlugin(Id, "The Other Roles", VersionString)]
+    [BepInPlugin(Id, "The Other Roles - Le Crew", VersionString)]
     [BepInProcess("Among Us.exe")]
     public class TheOtherRolesPlugin : BasePlugin
     {
         public const string Id = "me.eisbison.theotherroles";
-        public const string VersionString = "2.6.2";
+        public const string VersionString = "2.6.2.1";
         public static System.Version Version = System.Version.Parse(VersionString);
 
         public Harmony Harmony { get; } = new Harmony(Id);
@@ -43,8 +43,9 @@ namespace TheOtherRoles
             ServerManager serverManager = DestroyableSingleton<ServerManager>.Instance;
             IRegionInfo[] regions = defaultRegions;
 
+            var LeCrewRegion = new DnsRegionInfo("among-us.jerem2772.fr", "Le Crew", StringNames.NoTranslation, "among-us.jerem2772.fr", 22023);
             var CustomRegion = new DnsRegionInfo(Ip.Value, "Custom", StringNames.NoTranslation, Ip.Value, Port.Value);
-            regions = regions.Concat(new IRegionInfo[] { CustomRegion.Cast<IRegionInfo>() }).ToArray();
+            regions = regions.Concat(new IRegionInfo[] { LeCrewRegion.Cast<IRegionInfo>(), CustomRegion.Cast<IRegionInfo>() }).ToArray();
             ServerManager.DefaultRegions = regions;
             serverManager.AvailableRegions = regions;
         }

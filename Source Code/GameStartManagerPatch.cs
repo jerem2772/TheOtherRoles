@@ -47,9 +47,10 @@ namespace TheOtherRoles {
                     writer.Write((byte)TheOtherRolesPlugin.Version.Major);
                     writer.Write((byte)TheOtherRolesPlugin.Version.Minor);
                     writer.Write((byte)TheOtherRolesPlugin.Version.Build);
+                    writer.Write((byte)TheOtherRolesPlugin.Version.Revision);
                     writer.WritePacked(AmongUsClient.Instance.ClientId);
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
-                    RPCProcedure.versionHandshake(TheOtherRolesPlugin.Version.Major, TheOtherRolesPlugin.Version.Minor, TheOtherRolesPlugin.Version.Build, AmongUsClient.Instance.ClientId);
+                    RPCProcedure.versionHandshake(TheOtherRolesPlugin.Version.Major, TheOtherRolesPlugin.Version.Minor, TheOtherRolesPlugin.Version.Build, TheOtherRolesPlugin.Version.Revision, AmongUsClient.Instance.ClientId);
                 }
                 
                 if(kc < ks.Length && Input.GetKeyDown(ks[kc])) {
@@ -91,14 +92,14 @@ namespace TheOtherRoles {
                             continue;
                         else if (!playerVersions.ContainsKey(client.Id))  {
                             blockStart = true;
-                            message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} has a different or no version of The Other Roles\n</color>";
+                            message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} n'a pas ou a une version différente de The Other Roles - Le Crew\n</color>";
                         } else {
                             int diff = TheOtherRolesPlugin.Version.CompareTo(playerVersions[client.Id]);
                             if (diff > 0) {
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} has an older version of The Other Roles (v{playerVersions[client.Id].ToString()})\n</color>";
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus ancienne de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()})\n</color>";
                                 blockStart = true;
-                            } else if (diff > 0) {
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} has a newer version of The Other Roles (v{playerVersions[client.Id].ToString()}) \n</color>";
+                            } else if (diff < 0) {
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus récente de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()}) \n</color>";
                                 blockStart = true;
                             }
                         }

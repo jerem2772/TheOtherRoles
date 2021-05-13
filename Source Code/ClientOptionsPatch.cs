@@ -54,22 +54,22 @@ namespace TheOtherRoles {
             }
 
             if ((ghostsSeeTasksButton == null || ghostsSeeTasksButton.gameObject == null)) {
-                ghostsSeeTasksButton = createCustomToggle("Ghosts See Remaining Tasks: ", TheOtherRolesPlugin.GhostsSeeTasks.Value, new Vector2(-1.3f, -0.5f), (UnityEngine.Events.UnityAction)ghostsSeeTaskToggle, __instance);
+                ghostsSeeTasksButton = createCustomToggle("Les fantômes voient les Tasks restantes: ", TheOtherRolesPlugin.GhostsSeeTasks.Value, new Vector2(-1.3f, -0.5f), (UnityEngine.Events.UnityAction)ghostsSeeTaskToggle, __instance);
 
                 void ghostsSeeTaskToggle() {
                     TheOtherRolesPlugin.GhostsSeeTasks.Value = !TheOtherRolesPlugin.GhostsSeeTasks.Value;
                     MapOptions.ghostsSeeTasks = TheOtherRolesPlugin.GhostsSeeTasks.Value; 
-                    updateToggle(ghostsSeeTasksButton, "Ghosts See Remaining Tasks: ", TheOtherRolesPlugin.GhostsSeeTasks.Value);
+                    updateToggle(ghostsSeeTasksButton, "Les fantômes voient les Tasks restantes: ", TheOtherRolesPlugin.GhostsSeeTasks.Value);
                 }
             }
 
             if ((ghostsSeeRolesButton == null || ghostsSeeRolesButton.gameObject == null)) {
-                ghostsSeeRolesButton = createCustomToggle("Ghosts See Roles: ", TheOtherRolesPlugin.GhostsSeeRoles.Value, new Vector2(1.3f, -0.5f), (UnityEngine.Events.UnityAction)ghostsSeeRolesToggle, __instance);
+                ghostsSeeRolesButton = createCustomToggle("Les fantômes voient les Roles: ", TheOtherRolesPlugin.GhostsSeeRoles.Value, new Vector2(1.3f, -0.5f), (UnityEngine.Events.UnityAction)ghostsSeeRolesToggle, __instance);
 
                 void ghostsSeeRolesToggle() {
                     TheOtherRolesPlugin.GhostsSeeRoles.Value = !TheOtherRolesPlugin.GhostsSeeRoles.Value;
                     MapOptions.ghostsSeeRoles = TheOtherRolesPlugin.GhostsSeeRoles.Value; 
-                    updateToggle(ghostsSeeRolesButton, "Ghosts See Roles: ", TheOtherRolesPlugin.GhostsSeeRoles.Value);
+                    updateToggle(ghostsSeeRolesButton, "Les fantômes voient les Roles: ", TheOtherRolesPlugin.GhostsSeeRoles.Value);
                 }
             }
         }
