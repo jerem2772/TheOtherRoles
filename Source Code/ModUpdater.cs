@@ -31,7 +31,7 @@ namespace TheOtherRoles {
         private static void Prefix(MainMenuManager __instance) {
             CustomHatLoader.LaunchHatFetcher();
             ModUpdater.LaunchUpdater();
-            if (!ModUpdater.hasUpdate) return;
+            if (!ModUpdater.hasUpdate && !ModUpdater.hasDowngrade) return;
             var template = GameObject.Find("ExitGameButton");
             if (template == null) return;
 
@@ -44,7 +44,11 @@ namespace TheOtherRoles {
             
             var text = button.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
             __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => {
-                text.SetText("Update\nThe Others Role\nLe Crew");
+                if (ModUpdater.hasDowngrade){
+                    text.SetText("Downgrade\nThe Others Role\nLe Crew");
+                } else {
+                    text.SetText("Update\nThe Others Role\nLe Crew");
+                }
             })));
 
             TwitchManager man = DestroyableSingleton<TwitchManager>.Instance;
@@ -55,8 +59,18 @@ namespace TheOtherRoles {
                 button.SetActive(false);
                 ModUpdater.InfoPopup.TextAreaTMP.fontSize *= 0.7f;
                 ModUpdater.InfoPopup.TextAreaTMP.enableAutoSizing = false;
-                ModUpdater.InfoPopup.Show("Mise à jour en cours\nVeuillez patienter...");
-                __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Mis à jour en cours\nVeuillez patienter..."); })));
+                if(ModUpdater.updateurl is null) {
+                    ModUpdater.InfoPopup.Show("Cette mise à jour doit\nêtre effectuée manuellement");
+                    __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Cette mise à jour doit\nêtre effectuée manuellement"); })));
+                } else {
+                    if (ModUpdater.hasDowngrade){
+                        ModUpdater.InfoPopup.Show("Retour à la version\nprécédente en cours\nVeuillez patienter...");
+                        __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Retour à la version\nprécédente en cours\nVeuillez patienter..."); })));
+                    } else if(ModUpdater.hasUpdate) {
+                        ModUpdater.InfoPopup.Show("Mise à jour en cours\nVeuillez patienter...");
+                        __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Mise à jour en cours\nVeuillez patienter..."); })));
+                    }
+                }
             }
         }
     }
@@ -64,6 +78,7 @@ namespace TheOtherRoles {
     public class ModUpdater { 
         public static bool running = false;
         public static bool hasUpdate = false;
+        public static bool hasDowngrade = false;
         public static string updateurl = null;
         private static Task updateTask = null;
         public static GenericPopup InfoPopup;
@@ -78,9 +93,7 @@ namespace TheOtherRoles {
         public static void ExecuteUpdate() {
             if (updateTask == null) {
                 if (updateurl != null) {
-                    updateTask = downloadUpdate();
-                } else {
-                    showPopup("Cette mise à jour doit\nêtre effectuée manuellement ");
+                    updateTask = downloadUpdate();       
                 }
             }
         }
@@ -92,7 +105,7 @@ namespace TheOtherRoles {
                 foreach (string f in files)
                     File.Delete(f);
             } catch (System.Exception e) {
-                System.Console.WriteLine("Exception occured when clearing old versions:\n" + e);
+                System.Console.WriteLine("Une erreur s'est produite lors\nde la suppression des anciennes versions :\n" + e);   
             }
         }
 
@@ -100,8 +113,8 @@ namespace TheOtherRoles {
             try {
                 HttpClient http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "TheOtherRoles Updater");
-                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/Jerem2772/TheOtherRoles-LeCrew/releases/latest"), HttpCompletionOption.ResponseContentRead);
-                // var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/EoF-1141/TheOtherRoles/releases/latest"), HttpCompletionOption.ResponseContentRead);
+                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/jerem2772/TheOtherRoles-LeCrew/releases/latest"), HttpCompletionOption.ResponseContentRead);
+                //var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/jerem2772/Test-Update/releases/latest"), HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null) {
                     System.Console.WriteLine("Server returned no data: " + response.StatusCode.ToString());
                     return false;
@@ -118,6 +131,11 @@ namespace TheOtherRoles {
                 int diff = TheOtherRolesPlugin.Version.CompareTo(ver);
                 if (diff < 0) { // Update required
                     hasUpdate = true;
+                }
+                if (diff > 0) { // Downgrade required
+                    hasDowngrade = true;
+                }
+                if (ModUpdater.hasDowngrade | ModUpdater.hasUpdate){
                     JToken assets = data["assets"];
                     if (!assets.HasValues)
                         return false;

@@ -245,10 +245,12 @@ namespace TheOtherRoles
 
         private static void setRoleToRandomPlayer(byte roleId, List<PlayerControl> playerList) {
             
-            foreach(var blockedRoleId in CustomOptionHolder.blockedRolePairings[roleId]) {
-                if (AssignedRoles.Contains((byte)blockedRoleId) && roleId.Equals(roleId)) {
-                    return;
-                }      
+            if (CustomOptionHolder.blockedRolePairings.ContainsKey(roleId)) {
+                foreach(var blockedRoleId in CustomOptionHolder.blockedRolePairings[roleId]) {
+                    if (AssignedRoles.Contains((byte)blockedRoleId) && roleId.Equals(roleId)) {
+                        return;
+                    }      
+                }
             }
             var index = rnd.Next(0, playerList.Count);
             byte playerId = playerList[index].PlayerId;

@@ -13,11 +13,11 @@ namespace TheOtherRoles
         public static string fullCredentials = 
 $@"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}
 <size=80%>Modded by <color=#FCCE03FF>Eisbison</color>
-<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>";
+<color=#6F6195FF>Le Crew</color> by <color=#18A5FFFF>Jerem2772</color>";
 
     public static string mainMenuCredentials = 
 $@"Modded by <color=#FCCE03FF>Eisbison</color>
-<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>";
+<color=#6F6195FF>Le Crew</color> by <color=#18A5FFFF>Jerem2772</color>";
 
         [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
         private static class VersionShowerPatch
@@ -54,15 +54,15 @@ $@"Modded by <color=#FCCE03FF>Eisbison</color>
 
                 __instance.text.alignment = TMPro.TextAlignmentOptions.TopRight;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
-                    __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\n<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>\n" + __instance.text.text;
+                    __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\n<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color>\n {__instance.text.text}";
                     if (PlayerControl.LocalPlayer.Data.IsDead) {
-                        __instance.transform.localPosition = new Vector3(2.95f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(3.45f, 2.675f, __instance.transform.localPosition.z);
                     } else {
-                        __instance.transform.localPosition = new Vector3(3.7f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(4.2f, 2.675f, __instance.transform.localPosition.z);
                     }
                 } else {
                     __instance.text.text = $"{fullCredentials}\n{__instance.text.text}";
-                    __instance.transform.localPosition = new Vector3(3f, 2.675f, __instance.transform.localPosition.z);
+                    __instance.transform.localPosition = new Vector3(3.5f, 2.675f, __instance.transform.localPosition.z);
                 }
             }
         }
