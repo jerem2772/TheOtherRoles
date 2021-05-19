@@ -83,7 +83,9 @@ namespace TheOtherRoles {
         private static Task updateTask = null;
         public static GenericPopup InfoPopup;
 
-        public static void LaunchUpdater() {
+        public static void LaunchUpdater()
+        {
+            TheOtherRolesPlugin.UpdateRegions();
             if (running) return;
             running = true;
             checkForUpdate().GetAwaiter().GetResult();

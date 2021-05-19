@@ -44,11 +44,15 @@ namespace TheOtherRoles
             ServerManager serverManager = DestroyableSingleton<ServerManager>.Instance;
             IRegionInfo[] regions = defaultRegions;
 
-            var LeCrewRegion = new DnsRegionInfo("among-us.jerem2772.fr", "Le Crew", StringNames.NoTranslation, "among-us.jerem2772.fr", 22023);
+            System.Console.WriteLine(serverManager.AvailableRegions.Length);
+
+            var LeCrewRegion = new DnsRegionInfo("among-us.jerem2772.fr", "<color=#18A5FFFF>Le Crew</color>", StringNames.NoTranslation, "among-us.jerem2772.fr", 22023);
             var CustomRegion = new DnsRegionInfo(Ip.Value, "Custom", StringNames.NoTranslation, Ip.Value, Port.Value);
-            regions = regions.Concat(new IRegionInfo[] { LeCrewRegion.Cast<IRegionInfo>(), CustomRegion.Cast<IRegionInfo>() }).ToArray();
+            var castedLeCrewRegion = LeCrewRegion.Cast<IRegionInfo>();
+            regions = regions.Concat(new IRegionInfo[] { castedLeCrewRegion, CustomRegion.Cast<IRegionInfo>() }).ToArray();
             ServerManager.DefaultRegions = regions;
             serverManager.AvailableRegions = regions;
+            serverManager.CurrentRegion = castedLeCrewRegion;
         }
 
         public override void Load() {
@@ -65,8 +69,6 @@ namespace TheOtherRoles
             Ip = Config.Bind("Custom", "Custom Server IP", "127.0.0.1");
             Port = Config.Bind("Custom", "Custom Server Port", (ushort)22023);
             defaultRegions = ServerManager.DefaultRegions;
-
-            UpdateRegions();
 
             GameOptionsData.RecommendedImpostors = GameOptionsData.MaxImpostors = Enumerable.Repeat(3, 16).ToArray(); // Max Imp = Recommended Imp = 3
             GameOptionsData.MinPlayers = Enumerable.Repeat(4, 15).ToArray(); // Min Players = 4
