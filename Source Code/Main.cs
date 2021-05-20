@@ -44,12 +44,18 @@ namespace TheOtherRoles
         public static void UpdateRegions() {
             ServerManager serverManager = DestroyableSingleton<ServerManager>.Instance;
             IRegionInfo[] regions = defaultRegions;
-
-            var LeCrewRegion = new DnsRegionInfo("among-us.jerem2772.fr", "Le Crew", StringNames.NoTranslation, "among-us.jerem2772.fr", 22023);
+            
+            System.Console.WriteLine(serverManager.AvailableRegions.Length);
+            
+            var LeCrewRegion = new DnsRegionInfo("46.105.149.153", "<color=#18A5FFFF>Le Crew</color>", StringNames.NoTranslation, "46.105.149.153", 22023);
+            var LeCrew2Region = new DnsRegionInfo("among-us.jerem2772.fr", "<color=#6F6195FF>Le Crew 2</color>", StringNames.NoTranslation, "among-us.jerem2772.fr", 22023);
             var CustomRegion = new DnsRegionInfo(Ip.Value, "Custom", StringNames.NoTranslation, Ip.Value, Port.Value);
-            regions = regions.Concat(new IRegionInfo[] { LeCrewRegion.Cast<IRegionInfo>(), CustomRegion.Cast<IRegionInfo>() }).ToArray();
+            var castedLeCrewRegion = LeCrewRegion.Cast<IRegionInfo>();
+            var castedLeCrew2Region = LeCrew2Region.Cast<IRegionInfo>();
+            regions = regions.Concat(new IRegionInfo[] { castedLeCrewRegion, castedLeCrew2Region, CustomRegion.Cast<IRegionInfo>() }).ToArray();
             ServerManager.DefaultRegions = regions;
             serverManager.AvailableRegions = regions;
+            serverManager.CurrentRegion = castedLeCrewRegion;
         }
 
         public override void Load() {

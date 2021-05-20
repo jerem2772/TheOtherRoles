@@ -81,12 +81,12 @@ namespace TheOtherRoles {
             }
 
             if ((ghostsSeeVotesButton == null || ghostsSeeVotesButton.gameObject == null)) {
-                ghostsSeeVotesButton = createCustomToggle("Ghosts See votes: ", TheOtherRolesPlugin.GhostsSeeVotes.Value, new Vector2(0, yOffset), (UnityEngine.Events.UnityAction)ghostsSeeVotesToggle, __instance);
+                ghostsSeeVotesButton = createCustomToggle("Les fantômes voient les votes: ", TheOtherRolesPlugin.GhostsSeeVotes.Value, new Vector2(0, yOffset), (UnityEngine.Events.UnityAction)ghostsSeeVotesToggle, __instance);
 
                 void ghostsSeeVotesToggle() {
                     TheOtherRolesPlugin.GhostsSeeVotes.Value = !TheOtherRolesPlugin.GhostsSeeVotes.Value;
                     MapOptions.ghostsSeeVotes = TheOtherRolesPlugin.GhostsSeeVotes.Value; 
-                    updateToggle(ghostsSeeVotesButton, "Ghosts See Roles: ", TheOtherRolesPlugin.GhostsSeeVotes.Value);
+                    updateToggle(ghostsSeeVotesButton, "Les fantômes voient les votes: ", TheOtherRolesPlugin.GhostsSeeVotes.Value);
                 }
             }
         }

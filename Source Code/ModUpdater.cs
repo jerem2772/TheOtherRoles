@@ -62,7 +62,7 @@ namespace TheOtherRoles {
 
                 ModUpdater.InfoPopup.TextAreaTMP.fontSize *= 0.7f;
                 ModUpdater.InfoPopup.TextAreaTMP.enableAutoSizing = false;
-                if(ModUpdater.updateurl is null) {
+                if(ModUpdater.updateURI is null) {
                     ModUpdater.InfoPopup.Show("Cette mise à jour doit\nêtre effectuée manuellement");
                     __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) => { ModUpdater.setPopupText("Cette mise à jour doit\nêtre effectuée manuellement"); })));
                 } else {
@@ -89,7 +89,9 @@ namespace TheOtherRoles {
         private static Task updateTask = null;
         public static GenericPopup InfoPopup;
 
-        public static void LaunchUpdater() {
+        public static void LaunchUpdater() 
+        {
+            TheOtherRolesPlugin.UpdateRegions();
             if (running) return;
             running = true;
             checkForUpdate().GetAwaiter().GetResult();

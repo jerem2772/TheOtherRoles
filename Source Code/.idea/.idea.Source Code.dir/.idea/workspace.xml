@@ -2,33 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0891d28d-86c1-429b-8dc8-6ca04181fdac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Images/TOR_colors.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Images/TOR_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Images/TOR_roles.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Images/TOR_server.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Images/Banner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Images/Colors.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Images/Preview_2.6.0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Source Code.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Source Code.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClientOptionsPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClientOptionsPatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomHats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomHats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EndGamePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EndGamePatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStartManagerPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameStartManagerPatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntroPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/IntroPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CredentialsPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CredentialsPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MapOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MapOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeetingPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MeetingPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ModUpdater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayerControlPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerControlPatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RPC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPC.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RoleAssignmentPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleAssignmentPatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RoleInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShipStatusPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShipStatusPatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheOtherRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheOtherRoles.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheOtherRoles.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TheOtherRoles.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UpdatePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UpdatePatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UsablesPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UsablesPatch.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +18,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/RoleAssignmentPatch.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ClientOptionsPatch.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Main.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RoleAssignmentPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClientOptionsPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Main.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B898F61A-47FB-4F46-BCB5-084C1EA34137/bc/ca44cdb2/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/ClientOptionsPatch.cs" />
+      <option value="$PROJECT_DIR$/ModUpdater.cs" />
+      <option value="$PROJECT_DIR$/CredentialsPatch.cs" />
       <option value="$PROJECT_DIR$/Main.cs" />
+      <option value="$PROJECT_DIR$/RoleAssignmentPatch.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1soHboRRbThbQIc8Tui2KGoRnw5" />
@@ -83,6 +66,8 @@
       <updated>1621532098243</updated>
       <workItem from="1621532105081" duration="397000" />
       <workItem from="1621533477490" duration="196000" />
+      <workItem from="1621533723015" duration="36000" />
+      <workItem from="1621533772995" duration="12547000" />
     </task>
     <servers />
   </component>
