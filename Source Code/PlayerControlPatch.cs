@@ -1,3 +1,4 @@
+#nullable enable
 using HarmonyLib;
 using Hazel;
 using System;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnhollowerBaseLib;
 using static TheOtherRoles.TheOtherRoles;
 using static TheOtherRoles.GameHistory;
 using UnityEngine;
@@ -230,12 +232,91 @@ namespace TheOtherRoles {
             setPlayerOutline(Eraser.currentTarget, Eraser.color);
         }
 
+        private static Vent? CurrentEngineerVent()
+        {
+            var precision = 2;
+            var engineerPos = Engineer.engineer.GetTruePosition();
+
+            var engineerX = engineerPos.x;
+            var engineerY = engineerPos.y;
+
+            foreach (var vent in ShipStatus.Instance.AllVents)
+            {
+                var ventPos = vent.transform.position;
+
+                var ventX = ventPos.x;
+                var ventY = ventPos.y;
+
+                if (ventX - precision <= engineerX && ventX + precision >= engineerX && ventY - precision <= engineerY && ventY + precision >= engineerY)
+                {
+                    return vent;
+                }
+            }
+
+            return null;
+        }
+
+        private static List<Vent> RecursiveVentsList(List<Vent> linkedVents)
+        {
+            var updated = false;
+            var linkedVentsClone = new List<Vent>(linkedVents);
+            foreach (var v in linkedVents)
+            {
+                if(v.Center != null && !linkedVents.Find(vent => vent.Id == v.Center.Id))
+                {
+                    linkedVentsClone.Add(v.Center);
+                    updated = true;
+                }
+                else if(v.Left != null && !linkedVents.Find(vent => vent.Id == v.Left.Id))
+                {
+                    linkedVentsClone.Add(v.Left);
+                    updated = true;
+                }
+                else if(v.Right != null && !linkedVents.Find(vent => vent.Id == v.Right.Id))
+                {
+                    linkedVentsClone.Add(v.Right);
+                    updated = true;
+                }
+            }
+
+            if (updated)
+            {
+                return RecursiveVentsList(linkedVentsClone);
+            }
+            else
+            {
+                return linkedVentsClone;
+            }
+
+            
+        }
+
+        private static List<Vent> LinkedVents(Vent vent)
+        {
+            var linkedVents = new List<Vent>();
+            linkedVents.Add(vent);
+
+            return RecursiveVentsList(linkedVents);
+        }
+
         static void engineerUpdate() {
-            if (PlayerControl.LocalPlayer.Data.IsImpostor && ShipStatus.Instance?.AllVents != null) {
+            if (PlayerControl.LocalPlayer.Data.IsImpostor && ShipStatus.Instance?.AllVents != null)
+            {
+                var linkedVents = new List<Vent>();
+                if (Engineer.engineer != null && Engineer.engineer.inVent)
+                {
+                    var currentVent = CurrentEngineerVent();
+                    if (currentVent != null)
+                    {
+                        linkedVents = LinkedVents(currentVent);
+                    }
+                }
+                
                 foreach (Vent vent in ShipStatus.Instance.AllVents) {
-                    try {
+                    try
+                    {
                         if (vent?.myRend?.material != null) {
-                            if (Engineer.engineer != null && Engineer.engineer.inVent) {
+                            if (Engineer.engineer != null && linkedVents.Find(v => v.Id == vent.Id)) {
                                 vent.myRend.material.SetFloat("_Outline", 1f);
                                 vent.myRend.material.SetColor("_OutlineColor", Engineer.color);
                             } else if (vent.myRend.material.GetColor("_AddColor") != Color.red) {
