@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0891d28d-86c1-429b-8dc8-6ca04181fdac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Images/TOR_colors.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Images/TOR_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Images/TOR_roles.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Images/TOR_server.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Images/Banner.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Images/Colors.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Images/Preview_2.6.0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientOptionsPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClientOptionsPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomHats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomHats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EndGamePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EndGamePatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameStartManagerPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameStartManagerPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntroPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/IntroPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MapOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MapOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeetingPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MeetingPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ModUpdater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayerControlPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerControlPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RPC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoleAssignmentPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleAssignmentPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoleInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShipStatusPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShipStatusPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheOtherRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheOtherRoles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheOtherRoles.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TheOtherRoles.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UpdatePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UpdatePatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsablesPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UsablesPatch.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/RoleAssignmentPatch.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClientOptionsPatch.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Main.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/ClientOptionsPatch.cs" />
+      <option value="$PROJECT_DIR$/Main.cs" />
+    </changedPaths>
+  </component>
+  <component name="ProjectId" id="1soHboRRbThbQIc8Tui2KGoRnw5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0891d28d-86c1-429b-8dc8-6ca04181fdac" name="Default Changelist" comment="" />
+      <created>1621532098243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621532098243</updated>
+      <workItem from="1621532105081" duration="397000" />
+      <workItem from="1621533477490" duration="196000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
