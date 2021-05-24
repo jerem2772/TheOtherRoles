@@ -14,7 +14,6 @@ namespace TheOtherRoles {
     public static class PlayerControlFixedUpdatePatch
     {
         // Helpers
-
         static PlayerControl setTarget(bool onlyCrewmates = false, bool targetPlayersInVents = false, List<PlayerControl> untargetablePlayers = null, PlayerControl targetingPlayer = null) {
             PlayerControl result = null;
             float num = GameOptionsData.KillDistances[Mathf.Clamp(PlayerControl.GameOptions.KillDistance, 0, 2)];
@@ -229,20 +228,103 @@ namespace TheOtherRoles {
             Eraser.currentTarget = setTarget(onlyCrewmates: !Eraser.canEraseAnyone, untargetablePlayers: Eraser.canEraseAnyone ? new List<PlayerControl>() : untargetables);
             setPlayerOutline(Eraser.currentTarget, Eraser.color);
         }
+        
+        private static Vent? CurrentEngineerVent() {
+            var precision = 2;
+            var engineerPos = Engineer.engineer.GetTruePosition();
+
+            var engineerX = engineerPos.x;
+            var engineerY = engineerPos.y;
+
+            foreach (var vent in ShipStatus.Instance.AllVents) {
+                var ventPos = vent.transform.position;
+
+                var ventX = ventPos.x;
+                var ventY = ventPos.y;
+
+                if (ventX - precision <= engineerX && ventX + precision >= engineerX && ventY - precision <= engineerY && ventY + precision >= engineerY) {
+                    return vent;
+                }
+            }
+
+            return null;
+        }
+
+        private static List<Vent> RecursiveVentsList(List<Vent> linkedVents) {
+            var updated = false;
+            var linkedVentsClone = new List<Vent>(linkedVents);
+            foreach (var v in linkedVents) {
+                if(v.Center != null && !linkedVents.Find(vent => vent.Id == v.Center.Id)) {
+                    linkedVentsClone.Add(v.Center);
+                    updated = true;
+                }
+                else if(v.Left != null && !linkedVents.Find(vent => vent.Id == v.Left.Id)) {
+                    linkedVentsClone.Add(v.Left);
+                    updated = true;
+                }
+                else if(v.Right != null && !linkedVents.Find(vent => vent.Id == v.Right.Id)) {
+                    linkedVentsClone.Add(v.Right);
+                    updated = true;
+                }
+            }
+
+            if (updated) {
+                return RecursiveVentsList(linkedVentsClone);
+            }
+            else {
+                return linkedVentsClone;
+            }
+        }
+
+        private static List<Vent> LinkedVents(Vent vent)
+        {
+            var linkedVents = new List<Vent>();
+            linkedVents.Add(vent);
+
+            return RecursiveVentsList(linkedVents);
+        }
 
         static void engineerUpdate() {
             if (PlayerControl.LocalPlayer.Data.IsImpostor && ShipStatus.Instance?.AllVents != null) {
-                foreach (Vent vent in ShipStatus.Instance.AllVents) {
-                    try {
-                        if (vent?.myRend?.material != null) {
-                            if (Engineer.engineer != null && Engineer.engineer.inVent) {
-                                vent.myRend.material.SetFloat("_Outline", 1f);
-                                vent.myRend.material.SetColor("_OutlineColor", Engineer.color);
-                            } else if (vent.myRend.material.GetColor("_AddColor") != Color.red) {
-                                vent.myRend.material.SetFloat("_Outline", 0);
-                            }
+                if (Engineer.ventsVisibility == 0) {
+                    var linkedVents = new List<Vent>();
+                    if (Engineer.engineer != null && Engineer.engineer.inVent) {
+                        var currentVent = CurrentEngineerVent();
+                        if (currentVent != null) {
+                            linkedVents = LinkedVents(currentVent);
                         }
-                    } catch {}
+                    }
+
+                    foreach (Vent vent in ShipStatus.Instance.AllVents) {
+                        try {
+                            if (vent?.myRend?.material != null) {
+                                if (Engineer.engineer != null && linkedVents.Find(v => v.Id == vent.Id)) {
+                                    vent.myRend.material.SetFloat("_Outline", 1f);
+                                    vent.myRend.material.SetColor("_OutlineColor", Engineer.color);
+                                }
+                                else {
+                                    vent.myRend.material.SetFloat("_Outline", 1f);
+                                    vent.myRend.material.SetColor("_OutlineColor", Color.red);
+                                }
+                            }
+                        } catch {}
+                    }
+                }
+                else {
+                    foreach (Vent vent in ShipStatus.Instance.AllVents) {
+                        try {
+                            if (vent?.myRend?.material != null) {
+                                if (Engineer.engineer != null && Engineer.engineer.inVent) {
+                                    vent.myRend.material.SetFloat("_Outline", 1f);
+                                    vent.myRend.material.SetColor("_OutlineColor", Engineer.color);
+                                }
+                                else {
+                                    vent.myRend.material.SetFloat("_Outline", 1f);
+                                    vent.myRend.material.SetColor("_OutlineColor", Color.red);
+                                }
+                            }
+                        } catch {}
+                    }
                 }
             }
         }

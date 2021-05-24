@@ -9,7 +9,6 @@ using UnhollowerBaseLib;
 namespace TheOtherRoles {
     public class GameStartManagerPatch  {
         public static Dictionary<int, System.Version> playerVersions = new Dictionary<int, System.Version>();
-        private static float timer = 600f;
         private static bool versionSent = false;
         private static string lobbyCodeText = "";
 
@@ -18,8 +17,6 @@ namespace TheOtherRoles {
             public static void Postfix(GameStartManager __instance) {
                 // Trigger version refresh
                 versionSent = false;
-                // Reset lobby countdown timer
-                timer = 600f; 
                 // Copy lobby code
                 string code = InnerNet.GameCode.IntToGameName(AmongUsClient.Instance.GameId);
                 GUIUtility.systemCopyBuffer = code;
@@ -30,7 +27,6 @@ namespace TheOtherRoles {
         [HarmonyPatch(typeof(GameStartManager), nameof(GameStartManager.Update))]
         public class GameStartManagerUpdatePatch {
             private static bool update = false;
-            private static string currentText = "";
             private static int kc = 0;
             private static KeyCode[] ks = new [] { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.B, KeyCode.A, KeyCode.Return };
         
@@ -116,19 +112,6 @@ namespace TheOtherRoles {
 
                 // Lobby code replacement
                 __instance.GameRoomName.text = TheOtherRolesPlugin.StreamerMode.Value ? $"<color={TheOtherRolesPlugin.StreamerModeReplacementColor.Value}>{TheOtherRolesPlugin.StreamerModeReplacementText.Value}</color>" : lobbyCodeText;
-
-                // Lobby timer
-                if (!AmongUsClient.Instance.AmHost || !GameData.Instance) return; // Not host or no instance
-
-                if (update) currentText = __instance.PlayerCounter.text;
-
-                timer = Mathf.Max(0f, timer -= Time.deltaTime);
-                int minutes = (int)timer / 60;
-                int seconds = (int)timer % 60;
-                string suffix = $" ({minutes:00}:{seconds:00})";
-
-                __instance.PlayerCounter.text = currentText + suffix;
-                __instance.PlayerCounter.autoSizeTextContainer = true;
 
             }
         }

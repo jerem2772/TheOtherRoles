@@ -181,13 +181,6 @@ namespace TheOtherRoles
                 "Hack to find the Impostors",
                 RoleId.Hacker));
             }
-            if (Child.child != null && p == Child.child) { 
-                infos.Add(new RoleInfo(p.Data.IsImpostor ? "Bad Child" : "Good Child",
-                p.Data.IsImpostor ? Palette.ImpostorRed : Child.color,
-                "No one will harm you until you grow up",
-                "No one will harm you",
-                RoleId.Child));
-            }
             if (Tracker.tracker != null && p == Tracker.tracker) {
                 infos.Add(new RoleInfo("Tracker",
                 Tracker.color,
@@ -236,6 +229,13 @@ namespace TheOtherRoles
                 "Let them burn",
                 "Let them burn",
                 RoleId.Arsonist));
+            }
+            if (Child.child != null && p == Child.child) { 
+                infos.Add(new RoleInfo(p.Data.IsImpostor ? "Bad Child" : "Good Child",
+                    p.Data.IsImpostor ? Palette.ImpostorRed : Child.color,
+                    "No one will harm you until you grow up",
+                    "No one will harm you",
+                    RoleId.Child));
             }
 
             // Default roles

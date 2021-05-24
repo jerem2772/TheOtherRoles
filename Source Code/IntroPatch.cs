@@ -60,7 +60,7 @@ namespace TheOtherRoles
 
         public static void setupIntroRole(IntroCutscene __instance, ref  Il2CppSystem.Collections.Generic.List<PlayerControl> yourTeam) {
             List<RoleInfo> infos = RoleInfo.getRoleInfoForPlayer(PlayerControl.LocalPlayer);
-            RoleInfo roleInfo = infos.Where(info => info.roleId != RoleId.Lover).FirstOrDefault();
+            RoleInfo roleInfo = infos.Where(info => info.roleId != RoleId.Lover || info.roleId != RoleId.Child).FirstOrDefault();
 
             if (roleInfo != null) {
                 __instance.Title.text = roleInfo.name;
@@ -74,7 +74,13 @@ namespace TheOtherRoles
                 var loversText = UnityEngine.Object.Instantiate<TMPro.TextMeshPro>(__instance.ImpostorText, __instance.ImpostorText.transform.parent);
                 loversText.transform.localPosition += Vector3.down * 3f;
                 PlayerControl otherLover = PlayerControl.LocalPlayer == Lovers.lover1 ? Lovers.lover2 : Lovers.lover1;
-                loversText.text = Helpers.cs(Lovers.color, $"❤ You are in lover with {otherLover?.Data?.PlayerName ?? ""} ❤");
+                loversText.text = Helpers.cs(Lovers.color, $"❤ You are in love with {otherLover?.Data?.PlayerName ?? ""} ❤");
+            }
+            
+            if (infos.Any(info => info.roleId == RoleId.Child)) {
+                var childText = UnityEngine.Object.Instantiate<TMPro.TextMeshPro>(__instance.ImpostorText, __instance.ImpostorText.transform.parent);
+                childText.transform.localPosition += Vector3.down * 3.2f;
+                childText.text = Helpers.cs(Child.color, $"You are a Child");
             }
         }
 

@@ -10,7 +10,8 @@ using System.Text;
 using static TheOtherRoles.TheOtherRoles;
 
 namespace TheOtherRoles {
-    public class CustomOptionHolder {
+    public class CustomOptionHolder
+    {
         public static string[] rates = new string[]{"0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"};
         public static string[] presets = new string[]{"Preset 1", "Preset 2", "Preset 3", "Preset 4", "Preset 5"};
 
@@ -44,6 +45,7 @@ namespace TheOtherRoles {
 
         public static CustomOption childSpawnRate;
         public static CustomOption childGrowingUpDuration;
+        public static CustomOption childCanHaveAnotherRole;
 
         public static CustomOption loversSpawnRate;
         public static CustomOption loversImpLoverRate;
@@ -75,6 +77,7 @@ namespace TheOtherRoles {
         public static CustomOption mayorSpawnRate;
 
         public static CustomOption engineerSpawnRate;
+        public static CustomOption engineerVentsVisibility;
 
         public static CustomOption sheriffSpawnRate;
         public static CustomOption sheriffCooldown;
@@ -148,6 +151,11 @@ namespace TheOtherRoles {
         public static CustomOption blockSkippingInEmergencyMeetings;
         public static CustomOption noVoteIsSelfVote;
         public static CustomOption hidePlayerNames;
+        public static CustomOption betterPolus;
+        public static CustomOption disableScanAbuse;
+        public static CustomOption maxPlayerAdmin;
+        public static CustomOption maxPlayerVitals;
+        public static CustomOption maxPlayerCams;
 
         internal static Dictionary<byte, byte[]> blockedRolePairings = new Dictionary<byte, byte[]>();
 
@@ -161,6 +169,8 @@ namespace TheOtherRoles {
         }
 
         public static void Load() {
+            
+            //Last Le Crew Id Option used : 5006
             
             // Role Options
             presetSelection = CustomOption.Create(0, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Preset"), presets, null, true);
@@ -207,6 +217,7 @@ namespace TheOtherRoles {
             
             childSpawnRate = CustomOption.Create(180, cs(Child.color, "Child"), rates, null, true);
             childGrowingUpDuration = CustomOption.Create(181, "Child Growing Up Duration", 400f, 100f, 1500f, 100f, childSpawnRate);
+            childCanHaveAnotherRole = CustomOption.Create(5003, "Child Can Have Another Role", true, childSpawnRate);
 
             loversSpawnRate = CustomOption.Create(50, cs(Lovers.color, "Lovers"), rates, null, true);
             loversImpLoverRate = CustomOption.Create(51, "Chance That One Lover Is Impostor", rates, loversSpawnRate);
@@ -238,6 +249,7 @@ namespace TheOtherRoles {
             mayorSpawnRate = CustomOption.Create(80, cs(Mayor.color, "Mayor"), rates, null, true);
 
             engineerSpawnRate = CustomOption.Create(90, cs(Engineer.color, "Engineer"), rates, null, true);
+            engineerVentsVisibility = CustomOption.Create(5000, "Engineer Vents Visibility In Blue", new string[] {"Connected", "All"}, engineerSpawnRate);
 
             sheriffSpawnRate = CustomOption.Create(100, cs(Sheriff.color, "Sheriff"), rates, null, true);
             sheriffCooldown = CustomOption.Create(101, "Sheriff Cooldown", 30f, 10f, 60f, 2.5f, sheriffSpawnRate);
@@ -301,12 +313,19 @@ namespace TheOtherRoles {
             blockSkippingInEmergencyMeetings = CustomOption.Create(4, "Block Skipping In Emergency Meetings", false);
             noVoteIsSelfVote = CustomOption.Create(5, "No Vote Is Self Vote", false, blockSkippingInEmergencyMeetings);
             hidePlayerNames = CustomOption.Create(6, "Hide Player Names", false);
+            
+            //Better Polus
+            betterPolus = CustomOption.Create(5001, "Better Polus", true);
+            
+            //TryHard Option
+            disableScanAbuse = CustomOption.Create(5002, "Disable Scan Abuse", true);
+            maxPlayerAdmin = CustomOption.Create(5004, "Max Player Admin", 15f, 1f, 15f, 1f);
+            maxPlayerVitals = CustomOption.Create(5005, "Max Player Vitals", 15f, 1f, 15f, 1f);
+            maxPlayerCams = CustomOption.Create(5006, "Max Player Cams", 15f, 1f, 15f, 1f);
 
             blockedRolePairings.Add((byte)RoleId.Vampire, new [] { (byte)RoleId.Warlock});
             blockedRolePairings.Add((byte)RoleId.Warlock, new [] { (byte)RoleId.Vampire});
-            blockedRolePairings.Add((byte)RoleId.Spy, new [] { (byte)RoleId.Child});
-            blockedRolePairings.Add((byte)RoleId.Child, new [] { (byte)RoleId.Spy});
-            
+
         }
     }
 
@@ -605,8 +624,8 @@ namespace TheOtherRoles {
 
             int defaultSettingsLines = 19;
             int roleSettingsLines = defaultSettingsLines + 32;
-            int detailedSettingsP1 = roleSettingsLines + 34;
-            int detailedSettingsP2 = detailedSettingsP1 + 36;
+            int detailedSettingsP1 = roleSettingsLines + 36;
+            int detailedSettingsP2 = detailedSettingsP1 + 38;
             int end1 = hudString.TakeWhile(c => (defaultSettingsLines -= (c == '\n' ? 1 : 0)) > 0).Count();
             int end2 = hudString.TakeWhile(c => (roleSettingsLines -= (c == '\n' ? 1 : 0)) > 0).Count();
             int end3 = hudString.TakeWhile(c => (detailedSettingsP1 -= (c == '\n' ? 1 : 0)) > 0).Count();

@@ -91,6 +91,7 @@ namespace TheOtherRoles
             public static Color color = new Color(98f / 255f, 216f / 255f, 240f / 255f, 1);
             public static bool usedRepair;
             private static Sprite buttonSprite;
+            public static int ventsVisibility = 0;
 
             public static Sprite getButtonSprite() {
                 if (buttonSprite) return buttonSprite;
@@ -101,6 +102,7 @@ namespace TheOtherRoles
             public static void clearAndReload() {
                 engineer = null;
                 usedRepair = false;
+                ventsVisibility = CustomOptionHolder.engineerVentsVisibility.getSelection();
             }
         }
 

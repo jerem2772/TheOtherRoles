@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0891d28d-86c1-429b-8dc8-6ca04181fdac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/BlockOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TryHard.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Source Code.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Source Code.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientOptionsPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClientOptionsPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CredentialsPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CredentialsPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CustomOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameStartManagerPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameStartManagerPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntroPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/IntroPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ModUpdater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeetingPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MeetingPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayerControlPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlayerControlPatch.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RoleAssignmentPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleAssignmentPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoleInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RoleInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShipStatusPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShipStatusPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheOtherRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheOtherRoles.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,18 +26,63 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F097B3A0-54D7-4261-BD6B-9F920DE99C1C/57/a589782d/HarmonyPatch.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/F80F18DB-227E-473B-80F9-EF18F269CAF3/7b/93d43812/Vent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/7f/8547575e/Constants.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/08/987b2d0f/PlayerControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/c2/0a13a8f4/Vent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/39/0828f302/GameSettingMenu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/ce/f90d91dc/InnerNetObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67F75DD1-8B53-4BA5-B085-DAFCCE1D2894/e2/eaf96d93/SendOption.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PlayerControlPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/F80F18DB-227E-473B-80F9-EF18F269CAF3/a1/ba48b5c1/PlayerControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/21/6b40f044/GameOptionsMenu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/a5/3e7553bc/VitalsMinigame.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ModUpdater.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/32326F12-A26A-48A3-8C4C-FBD5B5FF9C86/a4/a84d75d3/BasePlugin.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/d7/0cfb4135/MapCountOverlay.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CredentialsPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/60/8255a42e/PlanetSurveillanceMinigame.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TheOtherRoles.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RoleAssignmentPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CustomOptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ClientOptionsPatch.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Main.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B898F61A-47FB-4F46-BCB5-084C1EA34137/bc/ca44cdb2/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67F75DD1-8B53-4BA5-B085-DAFCCE1D2894/58/a968863f/MessageReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/F80F18DB-227E-473B-80F9-EF18F269CAF3/ed/8caf4662/PlayerPhysics.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B898F61A-47FB-4F46-BCB5-084C1EA34137/63/fea703ea/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/5d/980a98ff/InnerNetClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/e5/daf53280/ShipStatus.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35160470-AEA7-49DE-9C94-9F2F7F9A1D30/9f/5a2b151a/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/20/aad759dc/GameData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0F2B0C4C-8EC8-4A48-A8A9-67BB92C2C316/b8/65079fec/ExileController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E7DB5C73-73D4-43FF-92F3-FAE120E230B7/cd/858e7266/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/67F75DD1-8B53-4BA5-B085-DAFCCE1D2894/e1/82a17c42/MessageWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/726D89F6-D7C0-4402-A55F-583DA134B02C/13/b6194f36/List`1.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/ClientOptionsPatch.cs" />
       <option value="$PROJECT_DIR$/ModUpdater.cs" />
+      <option value="$PROJECT_DIR$/GameStartManagerPatch.cs" />
+      <option value="$PROJECT_DIR$/BetterPolusPlugin.cs" />
+      <option value="$PROJECT_DIR$/TheOtherRoles.cs" />
+      <option value="$PROJECT_DIR$/ScannerPatches.cs" />
       <option value="$PROJECT_DIR$/CredentialsPatch.cs" />
-      <option value="$PROJECT_DIR$/Main.cs" />
+      <option value="$PROJECT_DIR$/ShipStatusPatch.cs" />
+      <option value="$PROJECT_DIR$/PlayerControlPatch.cs" />
+      <option value="$PROJECT_DIR$/TheOtherRoles.csproj" />
+      <option value="$PROJECT_DIR$/../../../../../../Program Files (x86)/Steam/steamapps/common/Among Us 2021.5.10s DEV/Run.bat" />
+      <option value="$PROJECT_DIR$/../../../../../../Program Files (x86)/Steam/steamapps/common/Among Us 2021.5.10s DEV/z_Run.bat" />
+      <option value="$PROJECT_DIR$/RoleInfo.cs" />
+      <option value="$PROJECT_DIR$/IntroPatch.cs" />
       <option value="$PROJECT_DIR$/RoleAssignmentPatch.cs" />
+      <option value="$PROJECT_DIR$/Main.cs" />
+      <option value="$PROJECT_DIR$/CustomOptions.cs" />
+      <option value="$PROJECT_DIR$/BlockOptions.cs" />
+      <option value="$PROJECT_DIR$/RPC.cs" />
+      <option value="$PROJECT_DIR$/MeetingPatch.cs" />
+      <option value="$PROJECT_DIR$/TryHard.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1soHboRRbThbQIc8Tui2KGoRnw5" />
@@ -39,9 +92,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -67,7 +122,29 @@
       <workItem from="1621532105081" duration="397000" />
       <workItem from="1621533477490" duration="196000" />
       <workItem from="1621533723015" duration="36000" />
-      <workItem from="1621533772995" duration="12547000" />
+      <workItem from="1621533772995" duration="13559000" />
+      <workItem from="1621562535784" duration="564000" />
+      <workItem from="1621563126915" duration="81000" />
+      <workItem from="1621563251419" duration="64000" />
+      <workItem from="1621563334141" duration="31000" />
+      <workItem from="1621563974929" duration="66000" />
+      <workItem from="1621564044722" duration="2057000" />
+      <workItem from="1621615230349" duration="35891000" />
+      <workItem from="1621666150923" duration="362000" />
+      <workItem from="1621666543072" duration="30000" />
+      <workItem from="1621666763167" duration="127000" />
+      <workItem from="1621666979527" duration="273000" />
+      <workItem from="1621667278357" duration="113000" />
+      <workItem from="1621667445257" duration="73000" />
+      <workItem from="1621668566249" duration="113000" />
+      <workItem from="1621668716259" duration="656000" />
+      <workItem from="1621671102246" duration="27000" />
+      <workItem from="1621671155855" duration="15423000" />
+      <workItem from="1621722883868" duration="12787000" />
+      <workItem from="1621788498585" duration="2530000" />
+      <workItem from="1621791069115" duration="199000" />
+      <workItem from="1621791292765" duration="44007000" />
+      <workItem from="1621873289278" duration="23047000" />
     </task>
     <servers />
   </component>
@@ -76,6 +153,18 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
