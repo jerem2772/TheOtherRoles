@@ -340,10 +340,10 @@ namespace TheOtherRoles
             vitalsBool = playersLeft > CustomOptionHolder.maxPlayerVitals.getFloat();
             adminBool = playersLeft > CustomOptionHolder.maxPlayerAdmin.getFloat();
             camsBool = playersLeft > CustomOptionHolder.maxPlayerCams.getFloat();
-            // System.Console.WriteLine("Method 3");
-            // System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
-            // System.Console.WriteLine("Players Left : " + playersLeft);
-            // System.Console.WriteLine("Admin : " + adminBool + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBool + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBool + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
+            System.Console.WriteLine("Method 3");
+            System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
+            System.Console.WriteLine("Players Left : " + playersLeft);
+            System.Console.WriteLine("Admin : " + adminBool + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBool + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBool + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
 
         }
 
@@ -354,7 +354,7 @@ namespace TheOtherRoles
             {
                 int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
                     !pc.Data.IsDead && !pc.Data.Disconnected) - (exiled != null ? 1 : 0);
-                udpateBools(playersLeft);
+                //udpateBools(playersLeft);
                 System.Console.WriteLine("Method 2");
                 System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
                 System.Console.WriteLine("Players Left : " + playersLeft);

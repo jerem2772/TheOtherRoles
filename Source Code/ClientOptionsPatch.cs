@@ -92,12 +92,12 @@ namespace TheOtherRoles {
             }
             
             if ((showRoleSummaryButton == null || showRoleSummaryButton.gameObject == null)) {
-                showRoleSummaryButton = createCustomToggle("Role Summary: ", TheOtherRolesPlugin.ShowRoleSummary.Value, new Vector2(xOffset, yOffset), (UnityEngine.Events.UnityAction)showRoleSummaryToggle, __instance);
+                showRoleSummaryButton = createCustomToggle("Résumé des rôles : ", TheOtherRolesPlugin.ShowRoleSummary.Value, new Vector2(xOffset, yOffset), (UnityEngine.Events.UnityAction)showRoleSummaryToggle, __instance);
 
                 void showRoleSummaryToggle() {
                     TheOtherRolesPlugin.ShowRoleSummary.Value = !TheOtherRolesPlugin.ShowRoleSummary.Value;
                     MapOptions.showRoleSummary = TheOtherRolesPlugin.ShowRoleSummary.Value; 
-                    updateToggle(showRoleSummaryButton, "Role Summary: ", TheOtherRolesPlugin.ShowRoleSummary.Value);
+                    updateToggle(showRoleSummaryButton, "Résumé des rôles : ", TheOtherRolesPlugin.ShowRoleSummary.Value);
                 }
             }
         }

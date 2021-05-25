@@ -222,11 +222,6 @@ namespace TheOtherRoles
                 Lovers.notAckedExiledIsLover = false;
                 if (exiled != null)
                     Lovers.notAckedExiledIsLover = ((Lovers.lover1 != null && Lovers.lover1.PlayerId == exiled.PlayerId) || (Lovers.lover2 != null && Lovers.lover2.PlayerId == exiled.PlayerId));
-                
-                // // Update counter 
-                // int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
-                //     !pc.Data.IsDead && !pc.Data.Disconnected) - (exiled != null ? 1 : 0);
-                //  BlockUtilitiesPatches.udpateBools(playersLeft);
             }
         }
 
