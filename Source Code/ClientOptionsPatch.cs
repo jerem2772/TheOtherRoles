@@ -15,6 +15,7 @@ namespace TheOtherRoles {
         private static ToggleButtonBehaviour ghostsSeeTasksButton;
         private static ToggleButtonBehaviour ghostsSeeRolesButton;
         private static ToggleButtonBehaviour ghostsSeeVotesButton;
+        private static ToggleButtonBehaviour showRoleSummaryButton;
 
         public static float xOffset = 1.75f;
         public static float yOffset = -0.5f;
@@ -87,6 +88,16 @@ namespace TheOtherRoles {
                     TheOtherRolesPlugin.GhostsSeeVotes.Value = !TheOtherRolesPlugin.GhostsSeeVotes.Value;
                     MapOptions.ghostsSeeVotes = TheOtherRolesPlugin.GhostsSeeVotes.Value; 
                     updateToggle(ghostsSeeVotesButton, "Les fantômes voient les votes: ", TheOtherRolesPlugin.GhostsSeeVotes.Value);
+                }
+            }
+            
+            if ((showRoleSummaryButton == null || showRoleSummaryButton.gameObject == null)) {
+                showRoleSummaryButton = createCustomToggle("Role Summary: ", TheOtherRolesPlugin.ShowRoleSummary.Value, new Vector2(xOffset, yOffset), (UnityEngine.Events.UnityAction)showRoleSummaryToggle, __instance);
+
+                void showRoleSummaryToggle() {
+                    TheOtherRolesPlugin.ShowRoleSummary.Value = !TheOtherRolesPlugin.ShowRoleSummary.Value;
+                    MapOptions.showRoleSummary = TheOtherRolesPlugin.ShowRoleSummary.Value; 
+                    updateToggle(showRoleSummaryButton, "Role Summary: ", TheOtherRolesPlugin.ShowRoleSummary.Value);
                 }
             }
         }

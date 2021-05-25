@@ -128,6 +128,8 @@ namespace TheOtherRoles {
         public static CustomOption spySpawnRate;
         public static CustomOption spyCanDieToSheriff;
         public static CustomOption spyImpostorsCanKillAnyone;
+        public static CustomOption spyCanEnterVents;
+        public static CustomOption spyHasImpostorVision;
 
         public static CustomOption tricksterSpawnRate;
         public static CustomOption tricksterPlaceBoxCooldown;
@@ -301,6 +303,8 @@ namespace TheOtherRoles {
             spySpawnRate = CustomOption.Create(240, cs(Spy.color, "Spy"), rates, null, true);
             spyCanDieToSheriff = CustomOption.Create(241, "Spy Can Die To Sheriff", false, spySpawnRate);
             spyImpostorsCanKillAnyone = CustomOption.Create(242, "Impostors Can Kill Anyone If There Is A Spy", true, spySpawnRate);
+            spyCanEnterVents = CustomOption.Create(243, "Spy Can Enter Vents", false, spySpawnRate);
+            spyHasImpostorVision = CustomOption.Create(244, "Spy Has Impostor Vision", false, spySpawnRate);
 
             securityGuardSpawnRate = CustomOption.Create(280, cs(SecurityGuard.color, "Security Guard"), rates, null, true);
             securityGuardCooldown = CustomOption.Create(281, "Security Guard Cooldown", 30f, 10f, 60f, 2.5f, securityGuardSpawnRate);
@@ -457,6 +461,16 @@ namespace TheOtherRoles {
                 }
                 option.optionBehaviour.gameObject.SetActive(true);
             }
+            
+            var commonTasksOption = allOptions.FirstOrDefault(x => x.name == "NumCommonTasks").TryCast<NumberOption>();
+            if(commonTasksOption != null) commonTasksOption.ValidRange = new FloatRange(0f, 4f);
+
+            var shortTasksOption = allOptions.FirstOrDefault(x => x.name == "NumShortTasks").TryCast<NumberOption>();
+            if(shortTasksOption != null) shortTasksOption.ValidRange = new FloatRange(0f, 23f);
+
+            var longTasksOption = allOptions.FirstOrDefault(x => x.name == "NumLongTasks").TryCast<NumberOption>();
+            if(longTasksOption != null) longTasksOption.ValidRange = new FloatRange(0f, 15f);
+            
             __instance.Children = allOptions.ToArray();
         }
     }
@@ -623,9 +637,9 @@ namespace TheOtherRoles {
             var hudString = sb.ToString();
 
             int defaultSettingsLines = 19;
-            int roleSettingsLines = defaultSettingsLines + 32;
-            int detailedSettingsP1 = roleSettingsLines + 36;
-            int detailedSettingsP2 = detailedSettingsP1 + 38;
+            int roleSettingsLines = defaultSettingsLines + 32;  //32 Origin v2.6.6
+            int detailedSettingsP1 = roleSettingsLines + 36;    //34 Origin v2.6.6
+            int detailedSettingsP2 = detailedSettingsP1 + 37;   //35 Origin v2.6.6
             int end1 = hudString.TakeWhile(c => (defaultSettingsLines -= (c == '\n' ? 1 : 0)) > 0).Count();
             int end2 = hudString.TakeWhile(c => (roleSettingsLines -= (c == '\n' ? 1 : 0)) > 0).Count();
             int end3 = hudString.TakeWhile(c => (detailedSettingsP1 -= (c == '\n' ? 1 : 0)) > 0).Count();
