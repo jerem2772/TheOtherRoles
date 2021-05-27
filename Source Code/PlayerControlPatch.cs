@@ -316,7 +316,7 @@ namespace TheOtherRoles {
                     foreach (Vent vent in ShipStatus.Instance.AllVents) {
                         try {
                             if (vent?.myRend?.material != null) {
-                                if (Engineer.engineer != null && Engineer.engineer.inVent) {
+                                if (Engineer.engineer != null && Engineer.ventsVisibility == 1 && Engineer.engineer.inVent) {
                                     vent.myRend.material.SetFloat("_Outline", 1f);
                                     vent.myRend.material.SetColor("_OutlineColor", Engineer.color);
                                 }
