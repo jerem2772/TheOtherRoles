@@ -179,37 +179,37 @@ namespace TheOtherRoles {
             presetSelection = CustomOption.Create(0, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Preset"), presets, null, true);
 
             // Using new id's for the options to not break compatibilty with older versions
-            crewmateRolesCountMin = CustomOption.Create(300, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Minimum Crewmate Roles"), 0f, 0f, 15f, 1f, null, true);
-            crewmateRolesCountMax = CustomOption.Create(301, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Crewmate Roles"), 0f, 0f, 15f, 1f);
+            crewmateRolesCountMin = CustomOption.Create(300, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Minimum Crewmate Roles"), 3f, 0f, 15f, 1f, null, true);
+            crewmateRolesCountMax = CustomOption.Create(301, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Crewmate Roles"), 5f, 0f, 15f, 1f);
             neutralRolesCountMin = CustomOption.Create(302, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Minimum Neutral Roles"), 0f, 0f, 15f, 1f);
-            neutralRolesCountMax = CustomOption.Create(303, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Neutral Roles"), 0f, 0f, 15f, 1f);
-            impostorRolesCountMin = CustomOption.Create(304, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Minimum Impostor Roles"), 0f, 0f, 3f, 1f);
-            impostorRolesCountMax = CustomOption.Create(305, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Impostor Roles"), 0f, 0f, 3f, 1f);
+            neutralRolesCountMax = CustomOption.Create(303, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Neutral Roles"), 1f, 0f, 15f, 1f);
+            impostorRolesCountMin = CustomOption.Create(304, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Minimum Impostor Roles"), 1f, 0f, 3f, 1f);
+            impostorRolesCountMax = CustomOption.Create(305, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Maximum Impostor Roles"), 3f, 0f, 3f, 1f);
 
             mafiaSpawnRate = CustomOption.Create(10, cs(Janitor.color, "Mafia"), rates, null, true);
             janitorCooldown = CustomOption.Create(11, "Janitor Cooldown", 30f, 10f, 60f, 2.5f, mafiaSpawnRate);
 
             morphlingSpawnRate = CustomOption.Create(20, cs(Morphling.color, "Morphling"), rates, null, true);
-            morphlingCooldown = CustomOption.Create(21, "Morphling Cooldown", 30f, 10f, 60f, 2.5f, morphlingSpawnRate);
+            morphlingCooldown = CustomOption.Create(21, "Morphling Cooldown", 25f, 10f, 60f, 2.5f, morphlingSpawnRate);
             morphlingDuration = CustomOption.Create(22, "Morph Duration", 10f, 1f, 20f, 0.5f, morphlingSpawnRate);
 
             camouflagerSpawnRate = CustomOption.Create(30, cs(Camouflager.color, "Camouflager"), rates, null, true);
-            camouflagerCooldown = CustomOption.Create(31, "Camouflager Cooldown", 30f, 10f, 60f, 2.5f, camouflagerSpawnRate);
+            camouflagerCooldown = CustomOption.Create(31, "Camouflager Cooldown", 25f, 10f, 60f, 2.5f, camouflagerSpawnRate);
             camouflagerDuration = CustomOption.Create(32, "Camo Duration", 10f, 1f, 20f, 0.5f, camouflagerSpawnRate);
 
             vampireSpawnRate = CustomOption.Create(40, cs(Vampire.color, "Vampire"), rates, null, true);
-            vampireKillDelay = CustomOption.Create(41, "Vampire Kill Delay", 10f, 1f, 20f, 1f, vampireSpawnRate);
+            vampireKillDelay = CustomOption.Create(41, "Vampire Kill Delay", 3f, 1f, 20f, 1f, vampireSpawnRate);
             vampireCooldown = CustomOption.Create(42, "Vampire Cooldown", 30f, 10f, 60f, 2.5f, vampireSpawnRate);
             vampireCanKillNearGarlics = CustomOption.Create(43, "Vampire Can Kill Near Garlics", true, vampireSpawnRate);
 
             eraserSpawnRate = CustomOption.Create(230, cs(Eraser.color, "Eraser"), rates, null, true);
-            eraserCooldown = CustomOption.Create(231, "Eraser Cooldown", 30f, 10f, 120f, 5f, eraserSpawnRate);
-            eraserCanEraseAnyone = CustomOption.Create(232, "Eraser Can Erase Anyone", false, eraserSpawnRate);
+            eraserCooldown = CustomOption.Create(231, "Eraser Cooldown", 50f, 10f, 120f, 5f, eraserSpawnRate);
+            eraserCanEraseAnyone = CustomOption.Create(232, "Eraser Can Erase Anyone", true, eraserSpawnRate);
 
             tricksterSpawnRate = CustomOption.Create(250, cs(Trickster.color, "Trickster"), rates, null, true);
-            tricksterPlaceBoxCooldown = CustomOption.Create(251, "Trickster Box Cooldown", 10f, 0f, 30f, 2.5f, tricksterSpawnRate);
+            tricksterPlaceBoxCooldown = CustomOption.Create(251, "Trickster Box Cooldown", 0f, 0f, 30f, 2.5f, tricksterSpawnRate);
             tricksterLightsOutCooldown = CustomOption.Create(252, "Trickster Lights Out Cooldown", 30f, 10f, 60f, 5f, tricksterSpawnRate);
-            tricksterLightsOutDuration = CustomOption.Create(253, "Trickster Lights Out Duration", 15f, 5f, 60f, 2.5f, tricksterSpawnRate);
+            tricksterLightsOutDuration = CustomOption.Create(253, "Trickster Lights Out Duration", 7.5f, 5f, 60f, 2.5f, tricksterSpawnRate);
 
             cleanerSpawnRate = CustomOption.Create(260, cs(Cleaner.color, "Cleaner"), rates, null, true);
             cleanerCooldown = CustomOption.Create(261, "Cleaner Cooldown", 30f, 10f, 60f, 2.5f, cleanerSpawnRate);
@@ -219,7 +219,7 @@ namespace TheOtherRoles {
             warlockRootTime = CustomOption.Create(272, "Warlock Root Time", 5f, 0f, 15f, 1f, warlockSpawnRate);
             
             childSpawnRate = CustomOption.Create(180, cs(Child.color, "Child"), rates, null, true);
-            childGrowingUpDuration = CustomOption.Create(181, "Child Growing Up Duration", 400f, 100f, 1500f, 100f, childSpawnRate);
+            childGrowingUpDuration = CustomOption.Create(181, "Child Growing Up Duration", 600f, 100f, 1500f, 100f, childSpawnRate);
             childCanHaveAnotherRole = CustomOption.Create(5003, "Child Can Have Another Role", true, childSpawnRate);
 
             loversSpawnRate = CustomOption.Create(50, cs(Lovers.color, "Lovers"), rates, null, true);
@@ -228,54 +228,54 @@ namespace TheOtherRoles {
             loversCanHaveAnotherRole = CustomOption.Create(53, "Lovers Can Have Another Role", true, loversSpawnRate);
 
             jesterSpawnRate = CustomOption.Create(60, cs(Jester.color, "Jester"), rates, null, true);
-            jesterCanCallEmergency = CustomOption.Create(61, "Jester can call emergency meeting", true, jesterSpawnRate);
+            jesterCanCallEmergency = CustomOption.Create(61, "Jester can call emergency meeting", false, jesterSpawnRate);
             jesterCanSabotage = CustomOption.Create(62, "Jester can sabotage", true, jesterSpawnRate);
 
             arsonistSpawnRate = CustomOption.Create(290, cs(Arsonist.color, "Arsonist"), rates, null, true);
-            arsonistCooldown = CustomOption.Create(291, "Arsonist Cooldown", 12.5f, 2.5f, 60f, 2.5f, arsonistSpawnRate);
+            arsonistCooldown = CustomOption.Create(291, "Arsonist Cooldown", 17.5f, 2.5f, 60f, 2.5f, arsonistSpawnRate);
             arsonistDuration = CustomOption.Create(292, "Arsonist Douse Duration", 3f, 1f, 10f, 1f, arsonistSpawnRate);
 
             jackalSpawnRate = CustomOption.Create(220, cs(Jackal.color, "Jackal"), rates, null, true);
-            jackalKillCooldown = CustomOption.Create(221, "Jackal/Sidekick Kill Cooldown", 30f, 10f, 60f, 2.5f, jackalSpawnRate);
-            jackalCreateSidekickCooldown = CustomOption.Create(222, "Jackal Create Sidekick Cooldown", 30f, 10f, 60f, 2.5f, jackalSpawnRate);
+            jackalKillCooldown = CustomOption.Create(221, "Jackal/Sidekick Kill Cooldown", 27.5f, 10f, 60f, 2.5f, jackalSpawnRate);
+            jackalCreateSidekickCooldown = CustomOption.Create(222, "Jackal Create Sidekick Cooldown", 45f, 10f, 60f, 2.5f, jackalSpawnRate);
             jackalCanUseVents = CustomOption.Create(223, "Jackal Can Use Vents", true, jackalSpawnRate);
-            jackalCanCreateSidekick = CustomOption.Create(224, "Jackal Can Create A Sidekick", false, jackalSpawnRate);
+            jackalCanCreateSidekick = CustomOption.Create(224, "Jackal Can Create A Sidekick", true, jackalSpawnRate);
             sidekickPromotesToJackal = CustomOption.Create(225, "Sidekick Gets Promoted To Jackal On Jackal Death", false, jackalSpawnRate);
-            sidekickCanKill = CustomOption.Create(226, "Sidekick Can Kill", false, jackalSpawnRate);
+            sidekickCanKill = CustomOption.Create(226, "Sidekick Can Kill", true, jackalSpawnRate);
             sidekickCanUseVents = CustomOption.Create(227, "Sidekick Can Use Vents", true, jackalSpawnRate);
             jackalPromotedFromSidekickCanCreateSidekick = CustomOption.Create(228, "Jackals Promoted From Sidekick Can Create A Sidekick", true, jackalSpawnRate);
             jackalCanCreateSidekickFromImpostor = CustomOption.Create(229, "Jackals Can Make An Impostor To His Sidekick", true, jackalSpawnRate);
-            jackalAndSidekickHaveImpostorVision = CustomOption.Create(430, "Jackal And Sidekick Have Impostor Vision", false, jackalSpawnRate);
+            jackalAndSidekickHaveImpostorVision = CustomOption.Create(430, "Jackal And Sidekick Have Impostor Vision", true, jackalSpawnRate);
 
             shifterSpawnRate = CustomOption.Create(70, cs(Shifter.color, "Shifter"), rates, null, true);
 
             mayorSpawnRate = CustomOption.Create(80, cs(Mayor.color, "Mayor"), rates, null, true);
 
             engineerSpawnRate = CustomOption.Create(90, cs(Engineer.color, "Engineer"), rates, null, true);
-            engineerVentsVisibility = CustomOption.Create(5000, "Engineer Vents Visibility In Blue", new string[] {"Connected", "All"}, engineerSpawnRate);
+            engineerVentsVisibility = CustomOption.Create(5000, "Engineer Vents Visibility In Blue", new string[] {"Connected", "All", "Off"}, engineerSpawnRate);
 
             sheriffSpawnRate = CustomOption.Create(100, cs(Sheriff.color, "Sheriff"), rates, null, true);
             sheriffCooldown = CustomOption.Create(101, "Sheriff Cooldown", 30f, 10f, 60f, 2.5f, sheriffSpawnRate);
-            sheriffCanKillNeutrals = CustomOption.Create(102, "Sheriff Can Kill Neutrals", false, sheriffSpawnRate);
+            sheriffCanKillNeutrals = CustomOption.Create(102, "Sheriff Can Kill Neutrals", true, sheriffSpawnRate);
 
 
             lighterSpawnRate = CustomOption.Create(110, cs(Lighter.color, "Lighter"), rates, null, true);
-            lighterModeLightsOnVision = CustomOption.Create(111, "Lighter Mode Vision On Lights On", 2f, 0.25f, 5f, 0.25f, lighterSpawnRate);
+            lighterModeLightsOnVision = CustomOption.Create(111, "Lighter Mode Vision On Lights On", 1.5f, 0.25f, 5f, 0.25f, lighterSpawnRate);
             lighterModeLightsOffVision = CustomOption.Create(112, "Lighter Mode Vision On Lights Off", 0.75f, 0.25f, 5f, 0.25f, lighterSpawnRate);
-            lighterCooldown = CustomOption.Create(113, "Lighter Cooldown", 30f, 5f, 120f, 5f, lighterSpawnRate);
+            lighterCooldown = CustomOption.Create(113, "Lighter Cooldown", 20f, 5f, 120f, 5f, lighterSpawnRate);
             lighterDuration = CustomOption.Create(114, "Lighter Duration", 5f, 2.5f, 60f, 2.5f, lighterSpawnRate);
 
             detectiveSpawnRate = CustomOption.Create(120, cs(Detective.color, "Detective"), rates, null, true);
             detectiveAnonymousFootprints = CustomOption.Create(121, "Anonymous Footprints", false, detectiveSpawnRate); 
-            detectiveFootprintIntervall = CustomOption.Create(122, "Footprint Intervall", 0.5f, 0.25f, 10f, 0.25f, detectiveSpawnRate);
+            detectiveFootprintIntervall = CustomOption.Create(122, "Footprint Intervall", 0.25f, 0.25f, 10f, 0.25f, detectiveSpawnRate);
             detectiveFootprintDuration = CustomOption.Create(123, "Footprint Duration", 5f, 0.25f, 10f, 0.25f, detectiveSpawnRate);
-            detectiveReportNameDuration = CustomOption.Create(124, "Time Where Detective Reports Will Have Name", 0, 0, 60, 2.5f, detectiveSpawnRate);
-            detectiveReportColorDuration = CustomOption.Create(125, "Time Where Detective Reports Will Have Color Type", 20, 0, 120, 2.5f, detectiveSpawnRate);
+            detectiveReportNameDuration = CustomOption.Create(124, "Time Where Detective Reports Will Have Name", 2.5f, 0f, 60f, 2.5f, detectiveSpawnRate);
+            detectiveReportColorDuration = CustomOption.Create(125, "Time Where Detective Reports Will Have Color Type", 15f, 0f, 120f, 2.5f, detectiveSpawnRate);
 
             timeMasterSpawnRate = CustomOption.Create(130, cs(TimeMaster.color, "Time Master"), rates, null, true);
-            timeMasterCooldown = CustomOption.Create(131, "Time Master Cooldown", 30f, 10f, 120f, 2.5f, timeMasterSpawnRate);
+            timeMasterCooldown = CustomOption.Create(131, "Time Master Cooldown", 25f, 10f, 120f, 2.5f, timeMasterSpawnRate);
             timeMasterRewindTime = CustomOption.Create(132, "Rewind Time", 3f, 1f, 10f, 1f, timeMasterSpawnRate);
-            timeMasterShieldDuration = CustomOption.Create(133, "Time Master Shield Duration", 3f, 1f, 20f, 1f, timeMasterSpawnRate);
+            timeMasterShieldDuration = CustomOption.Create(133, "Time Master Shield Duration", 7f, 1f, 20f, 1f, timeMasterSpawnRate);
 
             medicSpawnRate = CustomOption.Create(140, cs(Medic.color, "Medic"), rates, null, true);
             medicShowShielded = CustomOption.Create(143, "Show Shielded Player", new string[] {"Everyone", "Shielded + Medic", "Medic"}, medicSpawnRate);
@@ -283,20 +283,20 @@ namespace TheOtherRoles {
 
             swapperSpawnRate = CustomOption.Create(150, cs(Swapper.color, "Swapper"), rates, null, true);
             swapperCanCallEmergency = CustomOption.Create(151, "Swapper can call emergency meeting", false, swapperSpawnRate);
-            swapperCanOnlySwapOthers = CustomOption.Create(152, "Swapper can only swap others", false, swapperSpawnRate);
+            swapperCanOnlySwapOthers = CustomOption.Create(152, "Swapper can only swap others", true, swapperSpawnRate);
 
             seerSpawnRate = CustomOption.Create(160, cs(Seer.color, "Seer"), rates, null, true);
             seerMode = CustomOption.Create(161, "Seer Mode", new string[]{ "Show Death Flash + Souls", "Show Death Flash", "Show Souls"}, seerSpawnRate);
-            seerLimitSoulDuration = CustomOption.Create(163, "Seer Limit Soul Duration", false, seerSpawnRate);
-            seerSoulDuration = CustomOption.Create(162, "Seer Soul Duration", 15f, 0f, 60f, 5f, seerLimitSoulDuration);
+            seerLimitSoulDuration = CustomOption.Create(163, "Seer Limit Soul Duration", true, seerSpawnRate);
+            seerSoulDuration = CustomOption.Create(162, "Seer Soul Duration", 30f, 0f, 60f, 5f, seerLimitSoulDuration);
         
             hackerSpawnRate = CustomOption.Create(170, cs(Hacker.color, "Hacker"), rates, null, true);
-            hackerCooldown = CustomOption.Create(171, "Hacker Cooldown", 30f, 0f, 60f, 5f, hackerSpawnRate);
+            hackerCooldown = CustomOption.Create(171, "Hacker Cooldown", 25f, 0f, 60f, 5f, hackerSpawnRate);
             hackerHackeringDuration = CustomOption.Create(172, "Hacker Duration", 10f, 2.5f, 60f, 2.5f, hackerSpawnRate);
             hackerOnlyColorType = CustomOption.Create(173, "Hacker Only Sees Color Type", false, hackerSpawnRate);
 
             trackerSpawnRate = CustomOption.Create(200, cs(Tracker.color, "Tracker"), rates, null, true);
-            trackerUpdateIntervall = CustomOption.Create(201, "Tracker Update Intervall", 5f, 2.5f, 30f, 2.5f, trackerSpawnRate);
+            trackerUpdateIntervall = CustomOption.Create(201, "Tracker Update Intervall", 2.5f, 2.5f, 30f, 2.5f, trackerSpawnRate);
 
             snitchSpawnRate = CustomOption.Create(210, cs(Snitch.color, "Snitch"), rates, null, true);
             snitchLeftTasksForImpostors = CustomOption.Create(211, "Task Count Where Impostors See Snitch", 1f, 0f, 5f, 1f, snitchSpawnRate);
@@ -304,11 +304,11 @@ namespace TheOtherRoles {
             spySpawnRate = CustomOption.Create(240, cs(Spy.color, "Spy"), rates, null, true);
             spyCanDieToSheriff = CustomOption.Create(241, "Spy Can Die To Sheriff", false, spySpawnRate);
             spyImpostorsCanKillAnyone = CustomOption.Create(242, "Impostors Can Kill Anyone If There Is A Spy", true, spySpawnRate);
-            spyCanEnterVents = CustomOption.Create(243, "Spy Can Enter Vents", false, spySpawnRate);
-            spyHasImpostorVision = CustomOption.Create(244, "Spy Has Impostor Vision", false, spySpawnRate);
+            spyCanEnterVents = CustomOption.Create(243, "Spy Can Enter Vents", true, spySpawnRate);
+            spyHasImpostorVision = CustomOption.Create(244, "Spy Has Impostor Vision", true, spySpawnRate);
 
             securityGuardSpawnRate = CustomOption.Create(280, cs(SecurityGuard.color, "Security Guard"), rates, null, true);
-            securityGuardCooldown = CustomOption.Create(281, "Security Guard Cooldown", 30f, 10f, 60f, 2.5f, securityGuardSpawnRate);
+            securityGuardCooldown = CustomOption.Create(281, "Security Guard Cooldown", 20f, 10f, 60f, 2.5f, securityGuardSpawnRate);
             securityGuardTotalScrews = CustomOption.Create(282, "Security Guard Number Of Screws", 7f, 1f, 15f, 1f, securityGuardSpawnRate);
             securityGuardCamPrice = CustomOption.Create(283, "Number Of Screws Per Cam", 2f, 1f, 15f, 1f, securityGuardSpawnRate);
             securityGuardVentPrice = CustomOption.Create(284, "Number Of Screws Per Vent", 1f, 1f, 15f, 1f, securityGuardSpawnRate);
