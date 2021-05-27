@@ -93,7 +93,7 @@ namespace TheOtherRoles
 
         private static void ApplyChanges(ShipStatus instance)
         {
-            if (instance.Type == ShipStatus.MapType.Pb && CustomOptionHolder.betterPolus.getBool())
+            if (instance.Type == ShipStatus.MapType.Pb && MapOptions.betterPolus)
             {
                 FindPolusObjects();
                 AdjustPolus();

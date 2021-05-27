@@ -59,7 +59,7 @@ $@"Modded by <color=#FCCE03FF>Eisbison</color>
                 
                 __instance.text.alignment = TMPro.TextAlignmentOptions.TopRight;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
-                    __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\n<color=#6F6195FF>Le Crew</color> By <color=#18A5FFFF>Jerem2772</color> & <color=#970606FF>Eno</color>\n {__instance.text.text}";
+                    __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\nBy <color=#18A5FFFF>Jerem2772</color> & <color=#970606FF>Eno</color>\n {__instance.text.text}";
                     if (PlayerControl.LocalPlayer.Data.IsDead) {
                         __instance.transform.localPosition = new Vector3(2.95f, 2.675f, __instance.transform.localPosition.z);
                     } else {

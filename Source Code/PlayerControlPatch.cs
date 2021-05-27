@@ -171,6 +171,8 @@ namespace TheOtherRoles {
                 } else {
                     target = setTarget(true, true, new List<PlayerControl>() { Spy.spy });
                 }
+            } else if (MapOptions.unknownImpostor) {
+                target = setTarget(false, true);
             } else {
                 target = setTarget(true, true);
             }
@@ -342,6 +344,8 @@ namespace TheOtherRoles {
                 } else {
                     target = setTarget(true, true, new List<PlayerControl>() { Spy.spy });
                 }
+            } else if (MapOptions.unknownImpostor) {
+                target = setTarget(false, true);
             } else {
                 target = setTarget(true, true);
             }

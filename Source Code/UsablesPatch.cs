@@ -298,14 +298,23 @@ namespace TheOtherRoles
                 players = new Dictionary<SystemTypes, List<Color>>();
                 bool commsActive = false;
                     foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks)
-                        if (task.TaskType == TaskTypes.FixComms) commsActive = true;       
-
-
-                if (!__instance.isSab && commsActive)
+                        if (task.TaskType == TaskTypes.FixComms) commsActive = true;   
+                
+                __instance.SabotageText.color = Color.white;
+                
+                if (!__instance.isSab && commsActive || BlockUtilitiesPatches.adminBlocked)
                 {
                     __instance.isSab = true;
-                    __instance.BackgroundColor.SetColor(Palette.DisabledGrey);
                     __instance.SabotageText.gameObject.SetActive(true);
+                    if (commsActive) {
+                        __instance.SabotageText.text = "[ C O M M S  D I S A B L E D ]";
+                        __instance.SabotageText.SetFaceColor(Palette.ImpostorRed);
+                        __instance.BackgroundColor.SetColor(Palette.DisabledGrey);
+                    } else {
+                        __instance.SabotageText.text = "[ A D M I N  D E S A T I V A T É ]\n\nAu-dessus de " + CustomOptionHolder.maxPlayerAdmin.getFloat() + " joueurs";
+                        __instance.SabotageText.SetFaceColor(new Color32(255, 200, 0, Byte.MaxValue));
+                        __instance.BackgroundColor.SetColor(Palette.Black);
+                    }
                     return false;
                 }
                 if (__instance.isSab && !commsActive)

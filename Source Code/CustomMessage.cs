@@ -7,7 +7,7 @@ namespace TheOtherRoles{
     public class CustomMessage {
 
         private TMPro.TMP_Text text;
-        private static List<CustomMessage> customMessages = new List<CustomMessage>();
+        public static List<CustomMessage> customMessages = new List<CustomMessage>();
 
         public CustomMessage(string message, float duration) {
             RoomTracker roomTracker =  HudManager.Instance?.roomTracker;
@@ -28,9 +28,10 @@ namespace TheOtherRoles{
                     string prefix = (even ? "<color=#FCBA03FF>" : "<color=#FF0000FF>");
                     text.text = prefix + message + "</color>";
                     if (text != null) text.color = even ? Color.yellow : Color.red;
-                    if (p == 1f && text != null && text.gameObject != null) {
+                    if ((p == 1f || (!HudManagerUpdatePatch.lightOff && HudManagerUpdatePatch.msgCalled)) && text != null && text.gameObject != null) {
                         UnityEngine.Object.Destroy(text.gameObject);
                         customMessages.Remove(this);
+                        HudManagerUpdatePatch.msgCalled = false;
                     }
                 })));
             }

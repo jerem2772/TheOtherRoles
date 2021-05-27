@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using PowerTools;
 using UnityEngine;
@@ -15,9 +16,9 @@ using Hazel;
 namespace TheOtherRoles
 {
     
-    // ------------------------------------
-    // ------------ Scan Abuse ------------
-    // ------------------------------------
+    // ------------------------------------------------------------------------
+    // ------------------------------ Scan Abuse ------------------------------
+    // ------------------------------------------------------------------------
     internal class ScannerPatches
     {
         [HarmonyPatch(typeof(MedScanMinigame), nameof(MedScanMinigame.FixedUpdate))]
@@ -25,7 +26,7 @@ namespace TheOtherRoles
         {
             public static void Prefix(MedScanMinigame __instance)
             {
-                if (CustomOptionHolder.disableScanAbuse.getBool()) {
+                if (MapOptions.disableScanAbuse) {
                     if (__instance.MyNormTask.IsComplete)
                     {
                         return;
@@ -41,9 +42,9 @@ namespace TheOtherRoles
         }
     }
     
-    // -------------------------------------
-    // ------------ Vent in fog ------------
-    // -------------------------------------
+    // -------------------------------------------------------------------------
+    // ------------------------------ Vent in fog ------------------------------
+    // -------------------------------------------------------------------------
     
     internal class VisibleVentPatches
     {
@@ -119,9 +120,9 @@ namespace TheOtherRoles
     }
     
     
-    // ------------------------------------------
-    // ------------ CD after meeting ------------
-    // ------------------------------------------
+    // ------------------------------------------------------------------------------
+    // ------------------------------ CD after meeting ------------------------------
+    // ------------------------------------------------------------------------------
     
     // class KillCooldownAfterMeeting
     // {
@@ -140,149 +141,94 @@ namespace TheOtherRoles
     // }
     
     
-    // ---------------------------------------
-    // ------------ Block Options ------------
-    // ---------------------------------------
-    
+    // ---------------------------------------------------------------------------
+    // ------------------------------ Block Options ------------------------------
+    // ---------------------------------------------------------------------------
+
     public class BlockUtilitiesPatches
     {
-        private static bool vitalsBool = true;
-        private static bool adminBool = true;
-        private static bool camsBool = true;
+        private static bool vitalsBlocked = true;
+        public static bool adminBlocked = true;
+        private static bool camsBlocked = true;
 
+        // --------------------------
+        // --------- Vitals ---------
+        // --------------------------
         [HarmonyPatch(typeof(VitalsMinigame), nameof(VitalsMinigame.Update))]
         public static class VitalsMinigameUpdate
         {
             public static bool Prefix(VitalsMinigame __instance)
             {
-                if (!__instance.SabText.isActiveAndEnabled && vitalsBool)
+                bool commsActive = false;
+                foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks)
+                    if (task.TaskType == TaskTypes.FixComms)
+                        commsActive = true;
+
+                __instance.SabText.color = Color.white;
+
+                if (commsActive)
+                {
+                    __instance.SabText.text = "[ C O M M S  D I S A B L E D ]";
+                    __instance.SabText.SetFaceColor(Palette.ImpostorRed);
+                }
+                else
+                {
+                    __instance.SabText.text = "[ V I T A L S  D E S A T I V A T É ]\n\nAu-dessus de " +
+                                              CustomOptionHolder.maxPlayerVitals.getFloat() + " joueurs";
+                    __instance.SabText.SetFaceColor(new Color32(255, 200, 0, Byte.MaxValue));
+                }
+
+                if (!__instance.SabText.isActiveAndEnabled && vitalsBlocked)
                 {
                     __instance.SabText.gameObject.SetActive(true);
                     for (int j = 0; j < __instance.vitals.Length; j++)
                     {
                         __instance.vitals[j].gameObject.SetActive(false);
+
                     }
                 }
 
-                return !vitalsBool;
-            }
-        }
-
-        [HarmonyPatch(typeof(MapCountOverlay), nameof(MapCountOverlay.OnEnable))]
-        public static class MapCountOverlayOnEnable
-        {
-            public static void Postfix(MapCountOverlay __instance)
-            {
-                if (adminBool)
-                    __instance.BackgroundColor.SetColor(Palette.DisabledGrey);
-            }
-        }
-
-        [HarmonyPatch(typeof(MapCountOverlay), nameof(MapCountOverlay.Update))]
-        public static class MapCountOverlayUpdate
-        {
-            public static bool Prefix(MapCountOverlay __instance)
-            {
-                //Delay before display (Among Us code)
-                __instance.timer += Time.deltaTime;
-                if (__instance.timer < 0.1f)
-                {
-                    return false;
-                }
-
-                //Toggle ON/OFF depending on minPlayerAdmin parameter
-                if (!__instance.isSab && adminBool)
-                {
-                    __instance.isSab = true;
-                    __instance.BackgroundColor.SetColor(Palette.DisabledGrey);
-                    __instance.SabotageText.gameObject.SetActive(true);
-                }
-
-                return !adminBool;
+                return !vitalsBlocked;
             }
         }
         
-        // [HarmonyPatch(typeof(MapCountOverlay), nameof(MapCountOverlay.OnEnable))]
-        // public static class MapCountOverlayOnEnable
-        // {
-        //     public static void Postfix(MapCountOverlay __instance)
-        //     {
-        //         System.Console.WriteLine("                         OnEnable Call");
-        //         __instance.isSab = true;
-        //         if (adminBool)
-        //         {
-        //             
-        //             //__instance.BackgroundColor.SetColor(Palette.DisabledGrey);
-        //             // __instance.SabotageText.gameObject.SetActive(true);
-        //             //__instance.SabotageText.text = "T E S T";
-        //         }
-        //         System.Console.WriteLine("isSab : " + __instance.isSab);
-        //         System.Console.WriteLine("isActiveAndEnabled : " + __instance.isActiveAndEnabled);
-        //     }
-        // }
+        // -------------------------
+        // --------- Admin ---------
+        // -------------------------
         
-        // [HarmonyPatch(typeof(MapCountOverlay), nameof(MapCountOverlay.OnDisable))]
-        // public static class MapCountOverlayOnDisable
-        // {
-        //     public static void Postfix(MapCountOverlay __instance)
-        //     {
-        //         System.Console.WriteLine("                         OnDisable Call");
-        //         if (!adminBool)
-        //         {
-        //             __instance.enabled = true;
-        //             //__instance.BackgroundColor.SetColor(Palette.DisabledGrey);
-        //             // __instance.SabotageText.gameObject.SetActive(true);
-        //             //__instance.SabotageText.text = "T E S T";
-        //         }
-        //     }
-        // }
+        //Gestion of admin are integrated in UsablesPatch
         
-        // [HarmonyPatch(typeof(MapCountOverlay), nameof(MapCountOverlay.Update))]
-        // public static class MapCountOverlayUpdate
-        // {
-        //     public static bool Prefix(MapCountOverlay __instance)
-        //     {
-        //         
-        //         System.Console.WriteLine("      Method Update Call");
-        //         
-        //         //Delay before display (Among Us code)
-        //         __instance.timer += Time.deltaTime;
-        //         if (__instance.timer < 0.1f)
-        //         {
-        //             return false;
-        //         }
-        //
-        //         //Toggle ON/OFF depending on minPlayerAdmin parameter
-        //         if (!__instance.isSab && adminBool) {
-        //             System.Console.WriteLine("Method Update Call If");
-        //             //__instance.enabled = false;
-        //             //__instance.isSab = true;
-        //             //__instance.BackgroundColor.SetColor(Palette.DisabledGrey);
-        //             //__instance.SabotageText.gameObject.SetActive(true);
-        //             //__instance.SabotageText.text = "T E S T";
-        //         }
-        //         System.Console.WriteLine("isSab : " + __instance.isSab);
-        //         System.Console.WriteLine("Enable : " + __instance.enabled);
-        //         System.Console.WriteLine("isActiveAndEnabled : " + __instance.isActiveAndEnabled);
-        //         return !adminBool;
-        //     }
-        // }
-
+        // ----------------------------
+        // --------- Security ---------
+        // ----------------------------
         [HarmonyPatch(typeof(PlanetSurveillanceMinigame), nameof(PlanetSurveillanceMinigame.Update))]
         public static class PlanetSurveillanceMinigameUpdate
         {
             public static bool Prefix(PlanetSurveillanceMinigame __instance)
             {
+                bool commsActive = false;
+                foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks)
+                    if (task.TaskType == TaskTypes.FixComms) commsActive = true; 
+                
+                __instance.SabText.color = Color.white;
+                if (commsActive) {
+                    __instance.SabText.text = "[ C O M M S  D I S A B L E D ]";
+                    __instance.SabText.SetFaceColor(Palette.ImpostorRed);
+                } else {
+                    __instance.SabText.text = "[ C A M  D E S A T I V A T É E S ]\n\nAu-dessus de " + CustomOptionHolder.maxPlayerCams.getFloat() + " joueurs";
+                    __instance.SabText.SetFaceColor(new Color32(255, 200, 0, Byte.MaxValue));
+                }
+                
                 //Toggle ON/OFF depending on minPlayerCams parameter
-                if (!__instance.isStatic && camsBool)
+                if (!__instance.isStatic && camsBlocked)
                 {
                     __instance.isStatic = true;
                     __instance.ViewPort.sharedMaterial = __instance.StaticMaterial;
                     __instance.SabText.gameObject.SetActive(true);
-                    __instance.SabText.text = "[C A M]\n[D E S A T I V A T E]";
+                    
                 }
 
-                return !camsBool;
+                return !camsBlocked;
             }
         }
 
@@ -291,7 +237,7 @@ namespace TheOtherRoles
         {
             public static bool Prefix(PlanetSurveillanceMinigame __instance, int direction)
             {
-                if (camsBool)
+                if (camsBlocked)
                 {
                     if (direction != 0 && Constants.ShouldPlaySfx())
                     {
@@ -319,31 +265,51 @@ namespace TheOtherRoles
         {
             public static bool Prefix(SurveillanceMinigame __instance)
             {
+                
+                bool commsActive = false;
+                foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks)
+                    if (task.TaskType == TaskTypes.FixComms) commsActive = true;
+
+                for (int j = 0; j < __instance.ViewPorts.Length; j++)
+                {
+                    __instance.SabText[j].color = Color.white;
+                    if (commsActive)
+                    {
+                        __instance.SabText[j].text = "[ C O M M S  D I S A B L E D ]";
+                        __instance.SabText[j].SetFaceColor(Palette.ImpostorRed);
+                    }
+                    else
+                    {
+                        __instance.SabText[j].text = "[ C A M  D E S A T I V A T É E S ]\n\nAu-dessus de " +
+                                                    CustomOptionHolder.maxPlayerCams.getFloat() + " joueurs";
+                        __instance.SabText[j].SetFaceColor(new Color32(255, 200, 0, Byte.MaxValue));
+                    }
+                }
+
                 //Toggle ON/OFF depending on minPlayerCams parameter
-                if (!__instance.isStatic && camsBool)
+                if (!__instance.isStatic && camsBlocked)
                 {
                     __instance.isStatic = true;
                     for (int j = 0; j < __instance.ViewPorts.Length; j++)
                     {
                         __instance.ViewPorts[j].sharedMaterial = __instance.StaticMaterial;
                         __instance.SabText[j].gameObject.SetActive(true);
-                        __instance.SabText[j].text = "[C A M]\n[D E S A T I V A T E]";
                     }
                 }
-
-                return !camsBool;
+                
+                return !camsBlocked;
             }
         }
 
         public static void udpateBools(int playersLeft)
         {
-            vitalsBool = playersLeft > CustomOptionHolder.maxPlayerVitals.getFloat();
-            adminBool = playersLeft > CustomOptionHolder.maxPlayerAdmin.getFloat();
-            camsBool = playersLeft > CustomOptionHolder.maxPlayerCams.getFloat();
-            System.Console.WriteLine("Method 3");
-            System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
-            System.Console.WriteLine("Players Left : " + playersLeft);
-            System.Console.WriteLine("Admin : " + adminBool + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBool + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBool + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
+            vitalsBlocked = playersLeft > MapOptions.maxPlayerVitals;
+            adminBlocked = playersLeft > MapOptions.maxPlayerAdmin;
+            camsBlocked = playersLeft > MapOptions.maxPlayerCams;
+            // System.Console.WriteLine("Method 3");
+            // System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
+            // System.Console.WriteLine("Players Left : " + playersLeft);
+            // System.Console.WriteLine("Admin : " + adminBlocked + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBlocked + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBlocked + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
 
         }
 
@@ -354,15 +320,10 @@ namespace TheOtherRoles
             {
                 int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
                     !pc.Data.IsDead && !pc.Data.Disconnected) - (exiled != null ? 1 : 0);
-                //udpateBools(playersLeft);
-                System.Console.WriteLine("Method 2");
-                System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
-                System.Console.WriteLine("Players Left : " + playersLeft);
-                System.Console.WriteLine("Admin : " + adminBool + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBool + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBool + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
-                
+                udpateBools(playersLeft);
             }
         }
-
+        
         [HarmonyPatch(typeof(InnerNet.InnerNetClient), nameof(InnerNet.InnerNetClient.HandleMessage))]
         public static class InnerNetClientHandleMessage
         {
@@ -375,12 +336,6 @@ namespace TheOtherRoles
                 int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
                     !pc.Data.IsDead && !pc.Data.Disconnected);
                 udpateBools(playersLeft);
-                System.Console.WriteLine("Method 1");
-                System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
-                System.Console.WriteLine("Players Left : " + playersLeft);
-                System.Console.WriteLine("Admin : " + adminBool + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBool + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBool + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
-                
-
             }
         }
     }

@@ -12,8 +12,12 @@ namespace TheOtherRoles
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     class HudManagerUpdatePatch
     {
+        public static bool lightOff = false;
+        public static bool msgCalled = false;
+        
         public static bool hidePlayerName(PlayerControl source, PlayerControl target) {
             if (!MapOptions.hidePlayerNames) return false; // All names are visible
+            else if (MapOptions.unknownImpostor) return true; // All names are invisible
             else if (source == null || target == null) return true;
             else if (source == target) return false; // Player sees his own name
             else if (source.Data.IsImpostor && (target.Data.IsImpostor || target == Spy.spy)) return false; // Members of team Impostors see the names of Impostors/Spies
@@ -128,6 +132,17 @@ namespace TheOtherRoles
             // No else if here, as the Impostors need the Spy name to be colored
             if (Spy.spy != null && PlayerControl.LocalPlayer.Data.IsImpostor) {
                 setPlayerNameColor(Spy.spy, Spy.color);
+            }
+            
+            // Color in white the impostor mate when Unknown impostor is activate
+            if (MapOptions.unknownImpostor && PlayerControl.LocalPlayer.Data.IsImpostor) {
+                foreach (PlayerControl player in PlayerControl.AllPlayerControls) {
+                    if (PlayerControl.LocalPlayer.Data.IsImpostor && player.Data.IsImpostor) {
+                        setPlayerNameColor(player, Palette.White);
+                    }
+                }
+                setPlayerNameColor(PlayerControl.LocalPlayer, Palette.ImpostorRed);
+                
             }
 
             // Crewmate roles with no changes: Child
@@ -316,6 +331,23 @@ namespace TheOtherRoles
                 }
             }
         }
+        
+        static void lightIndicator() {
+            foreach (PlayerTask task in PlayerControl.LocalPlayer.myTasks) {
+                if (task.TaskType == TaskTypes.FixLights) {
+                    lightOff = true;
+                } else {
+                    lightOff = false;
+                }
+                if ((PlayerControl.LocalPlayer.Data.IsImpostor 
+                     || (Spy.spy == PlayerControl.LocalPlayer && CustomOptionHolder.spyHasImpostorVision.getBool() )
+                     || ((Jackal.jackal == PlayerControl.LocalPlayer || Sidekick.sidekick == PlayerControl.LocalPlayer) && CustomOptionHolder.jackalAndSidekickHaveImpostorVision.getBool()))
+                     && lightOff && !msgCalled) {
+                    new CustomMessage("Lights off", 300);
+                    msgCalled = true;
+                }
+            }
+        }
 
         static void Postfix(HudManager __instance)
         {
@@ -337,6 +369,8 @@ namespace TheOtherRoles
             childUpdate();
             // Snitch
             snitchUpdate();
+            // Impostor ligth off indicator
+            lightIndicator();
         }
     }
 }

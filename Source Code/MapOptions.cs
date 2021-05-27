@@ -15,6 +15,12 @@ namespace TheOtherRoles{
         public static bool ghostsSeeTasks = true;
         public static bool ghostsSeeVotes = true;
         public static bool showRoleSummary = true;
+        public static bool betterPolus = false;
+        public static bool disableScanAbuse = false;
+        public static float maxPlayerAdmin = 15;
+        public static float maxPlayerVitals = 15;
+        public static float maxPlayerCams = 15;
+        public static bool unknownImpostor = false;
 
         // Updating values
         public static int meetingsCount = 0;
@@ -34,6 +40,12 @@ namespace TheOtherRoles{
             ghostsSeeTasks = TheOtherRolesPlugin.GhostsSeeTasks.Value;
             ghostsSeeVotes = TheOtherRolesPlugin.GhostsSeeVotes.Value;
             showRoleSummary = TheOtherRolesPlugin.ShowRoleSummary.Value;
+            betterPolus = CustomOptionHolder.betterPolus.getBool();
+            disableScanAbuse = CustomOptionHolder.disableScanAbuse.getBool();
+            maxPlayerAdmin = CustomOptionHolder.maxPlayerAdmin.getFloat();
+            maxPlayerVitals = CustomOptionHolder.maxPlayerVitals.getFloat();
+            maxPlayerCams = CustomOptionHolder.maxPlayerCams.getFloat();
+            unknownImpostor = CustomOptionHolder.unknownImpostor.getBool();
         }
     }
 } 

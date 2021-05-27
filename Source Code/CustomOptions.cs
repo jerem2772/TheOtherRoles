@@ -158,6 +158,7 @@ namespace TheOtherRoles {
         public static CustomOption maxPlayerAdmin;
         public static CustomOption maxPlayerVitals;
         public static CustomOption maxPlayerCams;
+        public static CustomOption unknownImpostor;
 
         internal static Dictionary<byte, byte[]> blockedRolePairings = new Dictionary<byte, byte[]>();
 
@@ -172,7 +173,7 @@ namespace TheOtherRoles {
 
         public static void Load() {
             
-            //Last Le Crew Id Option used : 5006
+            //Last Le Crew Id Option used : 5007
             
             // Role Options
             presetSelection = CustomOption.Create(0, cs(new Color(204f / 255f, 204f / 255f, 0, 1f), "Preset"), presets, null, true);
@@ -320,6 +321,10 @@ namespace TheOtherRoles {
             
             //Better Polus
             betterPolus = CustomOption.Create(5001, "Better Polus", true);
+            
+            //Unknown Impostor
+
+            unknownImpostor = CustomOption.Create(5007, "Unknown Impostor", false);
             
             //TryHard Option
             disableScanAbuse = CustomOption.Create(5002, "Disable Scan Abuse", true);

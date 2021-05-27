@@ -142,6 +142,16 @@ namespace TheOtherRoles
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
                 RPCProcedure.forceEnd();
             }
+            
+            // Call a meeting
+            if(Input.GetKeyDown(KeyCode.M)) {
+                PlayerControl.LocalPlayer.CmdReportDeadBody(null);
+            }
+            
+            // Force skip all
+            if(Input.GetKeyDown(KeyCode.P)) {
+                MeetingHud.Instance.ForceSkipAll();
+            }
         }
 
         public static string RandomString(int length)

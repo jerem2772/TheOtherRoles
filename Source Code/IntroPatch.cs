@@ -45,6 +45,13 @@ namespace TheOtherRoles
                 soloTeam.Add(PlayerControl.LocalPlayer);
                 yourTeam = soloTeam;
             }
+            
+            // Intro solo teams unknown impostor
+            if (PlayerControl.LocalPlayer.Data.IsImpostor && MapOptions.unknownImpostor) {
+                var soloTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
+                soloTeam.Add(PlayerControl.LocalPlayer);
+                yourTeam = soloTeam;
+            }
 
             // Add the Spy to the Impostor team (for the Impostors)
             if (Spy.spy != null && PlayerControl.LocalPlayer.Data.IsImpostor) {

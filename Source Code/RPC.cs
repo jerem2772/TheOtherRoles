@@ -585,8 +585,10 @@ namespace TheOtherRoles
         public static void lightsOut() {
             Trickster.lightsOutTimer = Trickster.lightsOutDuration;
             // If the local player is impostor indicate lights out
-            if(PlayerControl.LocalPlayer.Data.IsImpostor) {
-                new CustomMessage("Lights are out", Trickster.lightsOutDuration);
+            if(PlayerControl.LocalPlayer.Data.IsImpostor
+               || (Spy.spy == PlayerControl.LocalPlayer && CustomOptionHolder.spyHasImpostorVision.getBool() )
+               || ((Jackal.jackal == PlayerControl.LocalPlayer || Sidekick.sidekick == PlayerControl.LocalPlayer) && CustomOptionHolder.jackalAndSidekickHaveImpostorVision.getBool())) {
+                new CustomMessage("Trickster lights off", Trickster.lightsOutDuration);
             }
         }
 
