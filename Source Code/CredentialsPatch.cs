@@ -45,15 +45,15 @@ $@"Modded by <color=#FCCE03FF>Eisbison</color>
         private static class PingTrackerPatch
         {
             
-            static void Prefix(PingTracker __instance)
-            {
-                var lcObject = new GameObject("LeCrew");
-                lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
-                lcObject.transform.parent = __instance.transform;
-                lcObject.transform.localPosition = new Vector3(1f, -0.1f, __instance.transform.localPosition.z);
-                lcObject.transform.localScale *= 0.55f;
-
-            }
+            // static void Prefix(PingTracker __instance)
+            // {
+            //     var lcObject = new GameObject("LeCrew");
+            //     lcObject.AddComponent<SpriteRenderer>().sprite = TheOtherRoles.getLogo("TheOtherRoles.Resources.LeCrew.png", 300f);
+            //     lcObject.transform.parent = __instance.transform;
+            //     lcObject.transform.localPosition = new Vector3(1f, -0.1f, __instance.transform.localPosition.z);
+            //     lcObject.transform.localScale *= 0.55f;
+            //
+            // }
             
             static void Postfix(PingTracker __instance){
                 
@@ -61,13 +61,13 @@ $@"Modded by <color=#FCCE03FF>Eisbison</color>
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
                     __instance.text.text = $"<color=#FCCE03FF>The Other Roles</color> <color=#6F6195FF>Le Crew</color> v{TheOtherRolesPlugin.Version.ToString()}\nBy <color=#18A5FFFF>Jerem2772</color> & <color=#970606FF>Eno</color>\n {__instance.text.text}";
                     if (PlayerControl.LocalPlayer.Data.IsDead) {
-                        __instance.transform.localPosition = new Vector3(2.95f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(3.45f, 2.675f, __instance.transform.localPosition.z);
                     } else {
-                        __instance.transform.localPosition = new Vector3(3.7f, 2.675f, __instance.transform.localPosition.z);
+                        __instance.transform.localPosition = new Vector3(4.2f, 2.675f, __instance.transform.localPosition.z);
                     }
                 } else {
                     __instance.text.text = $"{fullCredentials}\n{__instance.text.text}";
-                    __instance.transform.localPosition = new Vector3(3f, 2.675f, __instance.transform.localPosition.z);
+                    __instance.transform.localPosition = new Vector3(3.5f, 2.675f, __instance.transform.localPosition.z);
                 }
             }
         }
