@@ -15,8 +15,8 @@ namespace TheOtherRoles
     class SetInfectedPatch
     {
 
-        private static byte _playerInLove1;
-        private static byte _playerInLove2;
+        private static byte playerInLove1;
+        private static byte playerInLove2;
         private static bool childSpawned = false;
         public static void Postfix([HarmonyArgument(0)]Il2CppReferenceArray<GameData.PlayerInfo> infected)
         {
@@ -119,21 +119,21 @@ namespace TheOtherRoles
                 bool isOnlyRole = !CustomOptionHolder.loversCanHaveAnotherRole.getBool();
                 if (data.impostors.Count > 0 && data.crewmates.Count > 0 && (!isOnlyRole || (data.maxCrewmateRoles > 0 && data.maxImpostorRoles > 0)) && rnd.Next(1, 101) <= CustomOptionHolder.loversImpLoverRate.getSelection() * 10) {
                     setRoleToRandomPlayer((byte)RoleId.Lover, data.impostors, 0, isOnlyRole);
-                    _playerInLove1 = setRoleToRandomPlayer((byte) RoleId.Lover, data.crewmates, 1, isOnlyRole);
+                    playerInLove1 = setRoleToRandomPlayer((byte) RoleId.Lover, data.crewmates, 1, isOnlyRole);
                     if (isOnlyRole) {
                         data.maxCrewmateRoles--;
                         data.maxImpostorRoles--;
                     }
                 } else if (data.crewmates.Count >= 2 && (isOnlyRole || data.maxCrewmateRoles >= 2)) {
                     byte firstLoverId = setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 0, isOnlyRole);
-                    _playerInLove1 = firstLoverId;
+                    playerInLove1 = firstLoverId;
                     if (isOnlyRole) {
-                        _playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 1);
+                        playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 1);
                         data.maxCrewmateRoles -= 2;
                     } else {
                         var crewmatesWithoutFirstLover = data.crewmates.ToList();
                         crewmatesWithoutFirstLover.RemoveAll(p => p.PlayerId == firstLoverId);
-                        _playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, crewmatesWithoutFirstLover, 1, false);
+                        playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, crewmatesWithoutFirstLover, 1, false);
                         System.Console.WriteLine(crewmatesWithoutFirstLover.Count);
 
                     }
@@ -155,7 +155,7 @@ namespace TheOtherRoles
                     data.maxImpostorRoles--;
                 } else if (data.crewmates.Count > 0 && data.maxCrewmateRoles > 0) {
                     var crewmatesWithoutLovers = data.crewmates.ToList();
-                    crewmatesWithoutLovers.RemoveAll(p => p.PlayerId == _playerInLove1 || p.PlayerId == _playerInLove2);
+                    crewmatesWithoutLovers.RemoveAll(p => p.PlayerId == playerInLove1 || p.PlayerId == playerInLove2);
                     setRoleToRandomPlayer((byte)RoleId.Child, crewmatesWithoutLovers,0, false);
                 }
                 childSpawned = true;
