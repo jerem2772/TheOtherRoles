@@ -716,7 +716,6 @@ namespace TheOtherRoles
                     byte major = reader.ReadByte();
                     byte minor = reader.ReadByte();
                     byte patch = reader.ReadByte();
-                    byte revision = reader.ReadByte();
                     int versionOwnerId = reader.ReadPackedInt32();
                     byte revision = 0xFF;
                     Guid guid;

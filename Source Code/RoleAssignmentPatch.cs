@@ -30,7 +30,7 @@ namespace TheOtherRoles
             assignSpecialRoles(data); // Assign special roles like mafia and lovers first as they assign a role to multiple players and the chances are independent of the ticket system
             
             // Remove the Spy if a Mini was spawn and option "Mini can have another role" is disable or Unknown impostor are activate
-            if (Mini.mini != null && !CustomOptionHolder.childCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor)
+            if (Mini.mini != null && !CustomOptionHolder.miniCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor)
                 data.crewSettings.Remove((byte)RoleId.Spy);
 
             assignEnsuredRoles(data); // Assign roles that should always be in the game next
