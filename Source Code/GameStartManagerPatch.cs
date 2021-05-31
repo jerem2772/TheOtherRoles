@@ -1,6 +1,7 @@
   
 using HarmonyLib;
 using UnityEngine;
+using System.Reflection;
 using System.Collections.Generic;
 using Hazel;
 using System;
@@ -8,7 +9,9 @@ using UnhollowerBaseLib;
 
 namespace TheOtherRoles {
     public class GameStartManagerPatch  {
-        public static Dictionary<int, System.Version> playerVersions = new Dictionary<int, System.Version>();
+
+        public static Dictionary<int, PlayerVersion> playerVersions = new Dictionary<int, PlayerVersion>();
+
         private static bool versionSent = false;
         private static string lobbyCodeText = "";
 
@@ -45,8 +48,10 @@ namespace TheOtherRoles {
                     writer.Write((byte)TheOtherRolesPlugin.Version.Build);
                     writer.Write((byte)TheOtherRolesPlugin.Version.Revision);
                     writer.WritePacked(AmongUsClient.Instance.ClientId);
+                    writer.Write((byte)(TheOtherRolesPlugin.Version.Revision < 0 ? 0xFF : TheOtherRolesPlugin.Version.Revision));
+                    writer.Write(Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToByteArray());
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
-                    RPCProcedure.versionHandshake(TheOtherRolesPlugin.Version.Major, TheOtherRolesPlugin.Version.Minor, TheOtherRolesPlugin.Version.Build, TheOtherRolesPlugin.Version.Revision, AmongUsClient.Instance.ClientId);
+                    RPCProcedure.versionHandshake(TheOtherRolesPlugin.Version.Major, TheOtherRolesPlugin.Version.Minor, TheOtherRolesPlugin.Version.Build, TheOtherRolesPlugin.Version.Revision, Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId, AmongUsClient.Instance.ClientId);
                 }
                 
                 if(kc < ks.Length && Input.GetKeyDown(ks[kc])) {
@@ -90,12 +95,18 @@ namespace TheOtherRoles {
                             blockStart = true;
                             message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} n'a pas ou a une version différente de The Other Roles - Le Crew\n</color>";
                         } else {
-                            int diff = TheOtherRolesPlugin.Version.CompareTo(playerVersions[client.Id]);
+                            PlayerVersion PV = playerVersions[client.Id];
+                            int diff = TheOtherRolesPlugin.Version.CompareTo(PV.version);
                             if (diff > 0) {
                                 message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus ancienne de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()})\n</color>";
                                 blockStart = true;
+                                
                             } else if (diff < 0) {
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus récente de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()}) \n</color>";
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus récente de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()})\n</color>";
+                                blockStart = true;
+
+                            } else if (!PV.GuidMatches()) { // version presumably matches, check if Guid matches
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} has a modified version of TOR v{playerVersions[client.Id].version.ToString()} <size=30%>({PV.guid.ToString()})</size>\n</color>";
                                 blockStart = true;
                             }
                         }
@@ -133,6 +144,20 @@ namespace TheOtherRoles {
                 //     }
                 // }
                 return continueStart;
+            }
+        }
+
+        public class PlayerVersion {
+            public readonly Version version;
+            public readonly Guid guid;
+
+            public PlayerVersion(Version version, Guid guid) {
+                this.version = version;
+                this.guid = guid;
+            }
+
+            public bool GuidMatches() {
+                return Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.Equals(this.guid);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using Hazel;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +29,10 @@ namespace TheOtherRoles
             var data = getRoleAssignmentData();
             assignSpecialRoles(data); // Assign special roles like mafia and lovers first as they assign a role to multiple players and the chances are independent of the ticket system
             
-            // Remove the Spy if a Child was spawn and option "Child can have another role" is disable or Unknown impostor are activate
-            if (Child.child != null && !CustomOptionHolder.childCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor) data.crewSettings.Remove((byte)RoleId.Spy);
-            
+            // Remove the Spy if a Mini was spawn and option "Mini can have another role" is disable or Unknown impostor are activate
+            if (Mini.mini != null && !CustomOptionHolder.childCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor)
+                data.crewSettings.Remove((byte)RoleId.Spy);
+
             assignEnsuredRoles(data); // Assign roles that should always be in the game next
             assignChanceRoles(data); // Assign roles that may or may not be in the game last
         }
@@ -133,8 +134,6 @@ namespace TheOtherRoles
                         var crewmatesWithoutFirstLover = data.crewmates.ToList();
                         crewmatesWithoutFirstLover.RemoveAll(p => p.PlayerId == firstLoverId);
                         setRoleToRandomPlayer((byte)RoleId.Lover, crewmatesWithoutFirstLover, 1, false);
-                        System.Console.WriteLine(crewmatesWithoutFirstLover.Count);
-
                     }
                 }
             }
@@ -147,13 +146,25 @@ namespace TheOtherRoles
                 data.maxImpostorRoles -= 3;
             }
 
-            // Assign Child
-            if (rnd.Next(1, 101) <= CustomOptionHolder.childSpawnRate.getSelection() * 10) {
+            // Assign Mini
+            if (rnd.Next(1, 101) <= CustomOptionHolder.miniSpawnRate.getSelection() * 10) {
                 if (data.impostors.Count > 0 && data.maxImpostorRoles > 0 && rnd.Next(1, 101) <= 33) {
-                    setRoleToRandomPlayer((byte)RoleId.Child, data.impostors); 
+                    setRoleToRandomPlayer((byte)RoleId.Mini, data.impostors); 
                     data.maxImpostorRoles--;
                 } else if (data.crewmates.Count > 0 && data.maxCrewmateRoles > 0) {
-                    setRoleToRandomPlayer((byte)RoleId.Child, data.crewmates, 0, false);
+                    setRoleToRandomPlayer((byte)RoleId.Mini, data.crewmates, 0, false);
+                    data.maxCrewmateRoles--;
+                }
+            }
+
+            // Assign Guesser
+            if (rnd.Next(1, 101) <= CustomOptionHolder.guesserSpawnRate.getSelection() * 10) {
+                if (data.impostors.Count > 0 && data.maxImpostorRoles > 0 &&  rnd.Next(1, 101) <= CustomOptionHolder.guesserIsImpGuesserRate.getSelection() * 10) {
+                    setRoleToRandomPlayer((byte)RoleId.Guesser, data.impostors); 
+                    data.maxImpostorRoles--;
+                } else if (data.crewmates.Count > 0 && data.maxCrewmateRoles > 0) {
+                    setRoleToRandomPlayer((byte)RoleId.Guesser, data.crewmates);
+                    data.maxCrewmateRoles--;
                 }
             }
         }
