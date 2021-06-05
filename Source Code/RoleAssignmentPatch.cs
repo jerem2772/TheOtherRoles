@@ -32,6 +32,8 @@ namespace TheOtherRoles
             childSpawned = false;
             var data = getRoleAssignmentData();
             assignSpecialRoles(data); // Assign special roles like mafia and lovers first as they assign a role to multiple players and the chances are independent of the ticket system
+            if (Mini.mini != null) // Remove Spy from assigns, if Mini exists
+                data.crewSettings.Remove((byte)RoleId.Spy);
             assignEnsuredRoles(data); // Assign roles that should always be in the game next
             assignChanceRoles(data); // Assign roles that may or may not be in the game last
         }
@@ -119,21 +121,20 @@ namespace TheOtherRoles
                 bool isOnlyRole = !CustomOptionHolder.loversCanHaveAnotherRole.getBool();
                 if (data.impostors.Count > 0 && data.crewmates.Count > 0 && (!isOnlyRole || (data.maxCrewmateRoles > 0 && data.maxImpostorRoles > 0)) && rnd.Next(1, 101) <= CustomOptionHolder.loversImpLoverRate.getSelection() * 10) {
                     setRoleToRandomPlayer((byte)RoleId.Lover, data.impostors, 0, isOnlyRole);
-                    _playerInLove1 = setRoleToRandomPlayer((byte) RoleId.Lover, data.crewmates, 1, isOnlyRole);
+                    setRoleToRandomPlayer((byte) RoleId.Lover, data.crewmates, 1, isOnlyRole);
                     if (isOnlyRole) {
                         data.maxCrewmateRoles--;
                         data.maxImpostorRoles--;
                     }
                 } else if (data.crewmates.Count >= 2 && (isOnlyRole || data.maxCrewmateRoles >= 2)) {
                     byte firstLoverId = setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 0, isOnlyRole);
-                    _playerInLove1 = firstLoverId;
                     if (isOnlyRole) {
-                        _playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 1);
+                        setRoleToRandomPlayer((byte)RoleId.Lover, data.crewmates, 1);
                         data.maxCrewmateRoles -= 2;
                     } else {
                         var crewmatesWithoutFirstLover = data.crewmates.ToList();
                         crewmatesWithoutFirstLover.RemoveAll(p => p.PlayerId == firstLoverId);
-                        _playerInLove2 = setRoleToRandomPlayer((byte)RoleId.Lover, crewmatesWithoutFirstLover, 1, false);
+                        setRoleToRandomPlayer((byte)RoleId.Lover, crewmatesWithoutFirstLover, 1, false);
                         System.Console.WriteLine(crewmatesWithoutFirstLover.Count);
 
                     }
@@ -148,15 +149,25 @@ namespace TheOtherRoles
                 data.maxImpostorRoles -= 3;
             }
 
-            // Assign Child
-            if (rnd.Next(1, 101) <= CustomOptionHolder.childSpawnRate.getSelection() * 10) {
+            // Assign Mini
+            if (rnd.Next(1, 101) <= CustomOptionHolder.miniSpawnRate.getSelection() * 10) {
                 if (data.impostors.Count > 0 && data.maxImpostorRoles > 0 && rnd.Next(1, 101) <= 33) {
-                    setRoleToRandomPlayer((byte)RoleId.Child, data.impostors); 
+                    setRoleToRandomPlayer((byte)RoleId.Mini, data.impostors); 
                     data.maxImpostorRoles--;
                 } else if (data.crewmates.Count > 0 && data.maxCrewmateRoles > 0) {
-                    var crewmatesWithoutLovers = data.crewmates.ToList();
-                    crewmatesWithoutLovers.RemoveAll(p => p.PlayerId == _playerInLove1 || p.PlayerId == _playerInLove2);
-                    setRoleToRandomPlayer((byte)RoleId.Child, crewmatesWithoutLovers,0, false);
+                    setRoleToRandomPlayer((byte)RoleId.Mini, data.crewmates);
+                    data.maxCrewmateRoles--;
+                }
+            }
+
+            // Assign Guesser
+            if (rnd.Next(1, 101) <= CustomOptionHolder.guesserSpawnRate.getSelection() * 10) {
+                if (data.impostors.Count > 0 && data.maxImpostorRoles > 0 &&  rnd.Next(1, 101) <= CustomOptionHolder.guesserIsImpGuesserRate.getSelection() * 10) {
+                    setRoleToRandomPlayer((byte)RoleId.Guesser, data.impostors); 
+                    data.maxImpostorRoles--;
+                } else if (data.crewmates.Count > 0 && data.maxCrewmateRoles > 0) {
+                    setRoleToRandomPlayer((byte)RoleId.Guesser, data.crewmates);
+                    data.maxCrewmateRoles--;
                 }
                 childSpawned = true;
             }
