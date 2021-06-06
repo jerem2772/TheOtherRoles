@@ -45,7 +45,7 @@ namespace TheOtherRoles {
 
         public static CustomOption miniSpawnRate;
         public static CustomOption miniGrowingUpDuration;
-        public static CustomOption childCanHaveAnotherRole;
+        public static CustomOption miniCanHaveAnotherRole;
 
         public static CustomOption loversSpawnRate;
         public static CustomOption loversImpLoverRate;
@@ -224,7 +224,7 @@ namespace TheOtherRoles {
             
             miniSpawnRate = CustomOption.Create(180, cs(Mini.color, "Mini"), rates, null, true);
             miniGrowingUpDuration = CustomOption.Create(181, "Mini Growing Up Duration", 600f, 100f, 1500f, 100f, miniSpawnRate);
-            childCanHaveAnotherRole = CustomOption.Create(5003, "Child Can Have Another Role", true, miniSpawnRate);
+            miniCanHaveAnotherRole = CustomOption.Create(5003, "Mini Can Have Another Role", true, miniSpawnRate);
 
             loversSpawnRate = CustomOption.Create(50, cs(Lovers.color, "Lovers"), rates, null, true);
             loversImpLoverRate = CustomOption.Create(51, "Chance That One Lover Is Impostor", rates, loversSpawnRate);

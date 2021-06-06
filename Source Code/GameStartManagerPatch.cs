@@ -44,7 +44,6 @@ namespace TheOtherRoles {
                     writer.Write((byte)TheOtherRolesPlugin.Version.Major);
                     writer.Write((byte)TheOtherRolesPlugin.Version.Minor);
                     writer.Write((byte)TheOtherRolesPlugin.Version.Build);
-                    writer.Write((byte)TheOtherRolesPlugin.Version.Revision);
                     writer.WritePacked(AmongUsClient.Instance.ClientId);
                     writer.Write((byte)(TheOtherRolesPlugin.Version.Revision < 0 ? 0xFF : TheOtherRolesPlugin.Version.Revision));
                     writer.Write(Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToByteArray());
@@ -95,14 +94,15 @@ namespace TheOtherRoles {
                         } else {
                             PlayerVersion PV = playerVersions[client.Id];
                             int diff = TheOtherRolesPlugin.Version.CompareTo(PV.version);
+                            System.Console.WriteLine(client.Character.name + "  " + playerVersions[client.Id].version.ToString());
                             if (diff > 0) {
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus ancienne de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()})\n</color>";
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus ancienne de The Other Roles - Le Crew (v{playerVersions[client.Id].version.ToString()})\n</color>";
                                 blockStart = true;
                             } else if (diff < 0) {
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus récente de The Other Roles - Le Crew (v{playerVersions[client.Id].ToString()}) \n</color>";
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version plus récente de The Other Roles - Le Crew (v{playerVersions[client.Id].version.ToString()})\n</color>";
                                 blockStart = true;
                             } else if (!PV.GuidMatches()) { // version presumably matches, check if Guid matches
-                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} has a modified version of TOR v{playerVersions[client.Id].version.ToString()} <size=30%>({PV.guid.ToString()})</size>\n</color>";
+                                message += $"<color=#FF0000FF>{client.Character.Data.PlayerName} a une version modifié de TOR v{playerVersions[client.Id].version.ToString()} <size=30%>({PV.guid.ToString()})</size>\n</color>";
                                 blockStart = true;
                             }
                         }

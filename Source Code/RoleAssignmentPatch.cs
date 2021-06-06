@@ -14,10 +14,7 @@ namespace TheOtherRoles
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSetInfected))]
     class SetInfectedPatch
     {
-
-        private static byte _playerInLove1;
-        private static byte _playerInLove2;
-        private static bool childSpawned = false;
+        
         public static void Postfix([HarmonyArgument(0)]Il2CppReferenceArray<GameData.PlayerInfo> infected)
         {
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.ResetVaribles, Hazel.SendOption.Reliable, -1);
@@ -29,10 +26,10 @@ namespace TheOtherRoles
         }
 
         private static void assignRoles() {
-            childSpawned = false;
             var data = getRoleAssignmentData();
             assignSpecialRoles(data); // Assign special roles like mafia and lovers first as they assign a role to multiple players and the chances are independent of the ticket system
-            if (Mini.mini != null) // Remove Spy from assigns, if Mini exists
+            // Remove the Spy if a Mini was spawn and Mini can have another role is disable or Unknown impostor are activate
+            if (Mini.mini != null && !CustomOptionHolder.miniCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor)
                 data.crewSettings.Remove((byte)RoleId.Spy);
             assignEnsuredRoles(data); // Assign roles that should always be in the game next
             assignChanceRoles(data); // Assign roles that may or may not be in the game last
@@ -169,7 +166,6 @@ namespace TheOtherRoles
                     setRoleToRandomPlayer((byte)RoleId.Guesser, data.crewmates);
                     data.maxCrewmateRoles--;
                 }
-                childSpawned = true;
             }
         }
 
@@ -179,9 +175,6 @@ namespace TheOtherRoles
             List<byte> ensuredNeutralRoles = data.neutralSettings.Where(x => x.Value == 10).Select(x => x.Key).ToList();
             List<byte> ensuredImpostorRoles = data.impSettings.Where(x => x.Value == 10).Select(x => x.Key).ToList();
             
-            // Remove the Spy if a Child was spawn and option "Child can have another role" is disable or Unknown impostor are activate
-            if (childSpawned && !CustomOptionHolder.childCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor) ensuredCrewmateRoles.RemoveAll(x => x == (byte)RoleId.Spy);
-
             // Assign roles until we run out of either players we can assign roles to or run out of roles we can assign to players
             while (
                 (data.impostors.Count > 0 && data.maxImpostorRoles > 0 && ensuredImpostorRoles.Count > 0) || 
@@ -233,9 +226,6 @@ namespace TheOtherRoles
             List<byte> crewmateTickets = data.crewSettings.Where(x => x.Value > 0 && x.Value < 10).Select(x => Enumerable.Repeat(x.Key, x.Value)).SelectMany(x => x).ToList();
             List<byte> neutralTickets = data.neutralSettings.Where(x => x.Value > 0 && x.Value < 10).Select(x => Enumerable.Repeat(x.Key, x.Value)).SelectMany(x => x).ToList();
             List<byte> impostorTickets = data.impSettings.Where(x => x.Value > 0 && x.Value < 10).Select(x => Enumerable.Repeat(x.Key, x.Value)).SelectMany(x => x).ToList();
-
-            // Remove the Spy if a Child was spawn and Child can have another role is disable or Unknown impostor are activate
-            if (childSpawned && !CustomOptionHolder.childCanHaveAnotherRole.getBool() || MapOptions.unknownImpostor) crewmateTickets.RemoveAll(x => x == (byte)RoleId.Spy);
             
             // Assign roles until we run out of either players we can assign roles to or run out of roles we can assign to players
             while (
