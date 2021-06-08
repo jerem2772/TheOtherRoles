@@ -301,12 +301,12 @@ namespace TheOtherRoles
             }
         }
 
-        public static void udpateBools(int playersLeft)
+        public static void udpateBools(int playersLeft, string here)
         {
-            vitalsBlocked = playersLeft > MapOptions.maxPlayerVitals;
-            adminBlocked = playersLeft > MapOptions.maxPlayerAdmin;
-            camsBlocked = playersLeft > MapOptions.maxPlayerCams;
-            // System.Console.WriteLine("Method 3");
+            vitalsBlocked = playersLeft > CustomOptionHolder.maxPlayerVitals.getFloat();
+            adminBlocked = playersLeft > CustomOptionHolder.maxPlayerAdmin.getFloat();
+            camsBlocked = playersLeft > CustomOptionHolder.maxPlayerCams.getFloat();
+            // System.Console.WriteLine("Methode : " + here);
             // System.Console.WriteLine("PlayerControl Count : " + PlayerControl.AllPlayerControls.Count);
             // System.Console.WriteLine("Players Left : " + playersLeft);
             // System.Console.WriteLine("Admin : " + adminBlocked + " / " + CustomOptionHolder.maxPlayerAdmin.getFloat() + "\nVitals : " + vitalsBlocked + " / " + CustomOptionHolder.maxPlayerVitals.getFloat() + "\nCams : " + camsBlocked + " / " + CustomOptionHolder.maxPlayerCams.getFloat());
@@ -320,7 +320,7 @@ namespace TheOtherRoles
             {
                 int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
                     !pc.Data.IsDead && !pc.Data.Disconnected) - (exiled != null ? 1 : 0);
-                udpateBools(playersLeft);
+                udpateBools(playersLeft, "1");
             }
         }
         
@@ -335,7 +335,7 @@ namespace TheOtherRoles
 
                 int playersLeft = PlayerControl.AllPlayerControls.ToArray().Count(pc =>
                     !pc.Data.IsDead && !pc.Data.Disconnected);
-                udpateBools(playersLeft);
+                udpateBools(playersLeft, "2");
             }
         }
     }
